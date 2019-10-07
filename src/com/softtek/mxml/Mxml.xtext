@@ -1,0 +1,48 @@
+grammar com.softtek.mxml.Mxml with org.eclipse.xtext.common.Terminals
+
+generate mxml "http://www.softtek.com/mxml/Mxml"
+
+Model:
+	initialnode=INITNODE
+	nodes+=Node*;
+	
+terminal INITNODE:
+    '<?' -> '?>'
+;
+
+@Override
+terminal ML_COMMENT:
+    (('<!--'|'<![') -> ('-->'|']]>') ) //| '<'ID':Script>' -> '</'ID':Script>')
+ ;
+    
+@Override 
+terminal ID: 
+    ('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'|'0'..'9'|'.')*; 
+
+Node:
+ (SimpleNodeNoPrefix | SimpleNode | ComplexNodeNoPrefix | ComplexNode)
+;   
+ 
+SimpleNode:
+   '<' prefix=ID ':' name=ID (attrs+=Attr*) ('/>')
+;
+
+ComplexNode:
+   '<' prefix=ID  ':' name=ID (attrs+=Attr*) ('>')
+    nodes+=Node*
+   ('</' ID ':' ID ('>'))
+;
+
+SimpleNodeNoPrefix:
+   prefix='<' name=ID (attrs+=Attr*) ('/>')
+;
+
+ComplexNodeNoPrefix:
+   prefix='<' name=ID (attrs+=Attr*) ('>')
+    nodes+=Node*
+   ('</' ID '>')
+;
+  
+Attr:
+	(ns=ID':')? key=ID '=' value=STRING
+;

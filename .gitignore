@@ -1,0 +1,18 @@
+.DS_Store
+.settings
+bin
+META-INF
+model
+src-gen
+xtend-gen
+.classpath
+.project
+build.properties
+plugin.xml
+plugin.xml_gen
+GenerateRdl.mwe2
+RdlRuntimeModule.xtend
+RdlStandaloneSetup.xtend
+.launch/Rdl.launch
+.launch/Launch Runtime Eclipse.launch
+.launch/*
