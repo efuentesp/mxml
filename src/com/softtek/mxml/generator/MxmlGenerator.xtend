@@ -12,6 +12,9 @@ import com.softtek.mxml.generator.HtmlGenerator
 import com.softtek.mxml.generator.PugGenerator
 import com.softtek.mxml.mxml.ComplexNode
 import com.softtek.mxml.mxml.Project
+import com.softtek.mxml.utils.Util
+import java.util.LinkedHashMap
+import java.util.LinkedHashSet
 
 /**
  * Generates code from your model files on save.
@@ -21,32 +24,32 @@ import com.softtek.mxml.mxml.Project
 class MxmlGenerator extends AbstractGenerator {
   HtmlGenerator htmlGenerator= new HtmlGenerator()
   PugGenerator pugGenerator= new PugGenerator()
+  AppComponentListGenerator appComponentListGenerator = new AppComponentListGenerator()
   
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-		 pugGenerator.doGenerator(resource,fsa)
-		  
+		 pugGenerator.doGenerator(resource,fsa)	
+		 appComponentListGenerator.doGenerator(resource,fsa) 
+		 		  		   
 //		fsa.generateFile('greetings.txt', 'People to greet: ' + 
 //			resource.allContents
 //				.filter(Greeting)
 //				.map[name]
 //				.join(', '))
 	}
-	
-	
-	def void printNodes(Node n){
+		
+	def void printNodes(Node n, LinkedHashMap<String, LinkedHashSet<String>> app){
 		if (n instanceof ComplexNode)
 			  { 
 			  	println("Complex:"+n.name)
 			  	var innernode = n as ComplexNode 
-			  	for(i: innernode.nodes){
-			  		printNodes(i)
+			  	for(i: innernode.nodes){			  	
+			  		printNodes(i, app)
 			  	}
 			  	println("Complex:/"+n.name)
 		}
 		else
-		println("Simple:"+n.name)
+			println("Simple:"+n.name)	
 	}
 	
-	
-	
+		
 }

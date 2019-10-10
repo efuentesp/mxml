@@ -7,9 +7,12 @@ import com.softtek.mxml.mxml.Node
 import java.util.List
 import com.softtek.mxml.mxml.ComplexNode
 import com.softtek.mxml.mxml.Project
+import com.softtek.mxml.utils.Util
 
 class PugGenerator {
 	
+	Util util = new Util()
+
 	def doGenerator(Resource r, IFileSystemAccess2 fsa) {
        for (p : r.allContents.toIterable.filter(typeof(Project))){
 		for (m: p.files){
@@ -18,8 +21,8 @@ class PugGenerator {
 	   }
 	}
 	
-	def void generateCodeByNode(Node node, String fname, String path,IFileSystemAccess2 fsa) {
-		fsa.generateFile("pug/"+path+"/"+fname+".pug", genPugFile(node))	
+	def void generateCodeByNode(Node node, String fname, String path,IFileSystemAccess2 fsa) {				
+		fsa.generateFile("pug/"+path+"/"+fname+".pug", genPugFile(node))				
 	}
 	
 	def CharSequence genPugFile(Node node) '''
@@ -28,18 +31,18 @@ class PugGenerator {
 		  head
 		    title= pageTitle
 		  body
-		  «genNodes(node)»
+		«genNodes(0, node)»
 	'''
       
-    def CharSequence genNodes(Node n)'''
+    def CharSequence genNodes(int indentation, Node n)'''
 		«IF (n instanceof ComplexNode)»
-		  «getNodeType(n)»
+		  «util.getIndentation(indentation+1)»«getNodeType(n)»
 		  «var innernode = n as ComplexNode»
 		  «FOR i: innernode.nodes»
-		  «   genNodes(i)»
+		  «genNodes(indentation+1, i)»
 		  «ENDFOR»
 		«ELSE»
-		  «getNodeType(n)»
+		   «util.getIndentation(indentation+1)»«getNodeType(n)»
 		«ENDIF»
 	'''
       
@@ -51,29 +54,16 @@ class PugGenerator {
 	def CharSequence getNodeType(Node n)'''
 		«IF (n.prefix.equals('mx')) » 
 		«IF (n.name.equals('Label'))» 
-		  label.«n.prefix»#«getNodeAttrValue(n,"id")» «getNodeAttrValue(n,"text")»
+		  label.«n.prefix»#«util.getNodeAttrValue(n,"id")» «util.getNodeAttrValue(n,"text")»
 		«ENDIF»
 	    «IF (n.name.equals('Button'))» 
-	      button.«n.prefix»#«getNodeAttrValue(n,"id")» «getNodeAttrValue(n,"label")»
+	      button.«n.prefix»#«util.getNodeAttrValue(n,"id")» «util.getNodeAttrValue(n,"label")»
 	    «ENDIF»
 	    «IF (!n.name.equals('Label') && !n.name.equals('Button') )» 
-		.«getNodeClass(n)»
+		.«util.getNodeClass(n)»
 		«ENDIF»
         «ENDIF»
 	'''
 
-	def String getNodeAttrValue(Node n, String key){
-	   for( a:n.attrs.toList)
-	    if(a.key.equals(key))  return (a.value)
-	}
-    
-    def String getNodeAttrKeyValue(Node n, String key){
-	   for( a:n.attrs.toList)
-	    if(a.key.equals(key))  return (a.key+ ":" +"\""+a.value+"\"")
-	}
-	
-	def String getNodeClass(Node n){
-	   return (n.name.toLowerCase)
-	}
 	
 }
