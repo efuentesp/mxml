@@ -11,7 +11,10 @@ class HtmlGenerator {
 	
 	def doGenerator(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		var nodes = resource.allContents.filter(Node).toList
-		fsa.generateFile("html/MxToHtml.html", genHtmlFile(nodes))	
+		println(resource.URI.lastSegment)
+	    var filename=resource.URI.lastSegment.substring(0,resource.URI.lastSegment.indexOf("."))
+		
+		fsa.generateFile("html/"+filename+".html", genHtmlFile(nodes))	
 
 	}
 	

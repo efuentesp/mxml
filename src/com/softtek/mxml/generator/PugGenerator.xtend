@@ -6,24 +6,29 @@ import org.eclipse.emf.ecore.resource.Resource
 import com.softtek.mxml.mxml.Node
 import java.util.List
 import com.softtek.mxml.mxml.ComplexNode
+import com.softtek.mxml.mxml.Project
 
 class PugGenerator {
 	
-	def doGenerator(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-	    var nodes = resource.allContents.filter(Node).toList
-	    println(resource.URI.lastSegment)
-	    var filename=resource.URI.lastSegment.substring(0,resource.URI.lastSegment.indexOf("."))
-		fsa.generateFile("pug/"+filename+".pug", genPugFile(nodes))	
+	def doGenerator(Resource r, IFileSystemAccess2 fsa) {
+       for (p : r.allContents.toIterable.filter(typeof(Project))){
+		for (m: p.files){
+			 m.file_ref.generateCodeByNode(m.file_ref.name,m.path_ref,fsa)
+		}
+	   }
 	}
 	
+	def void generateCodeByNode(Node node, String fname, String path,IFileSystemAccess2 fsa) {
+		fsa.generateFile("pug/"+path+"/"+fname+".pug", genPugFile(node))	
+	}
 	
-	def CharSequence genPugFile(List<Node> nodes) '''
+	def CharSequence genPugFile(Node node) '''
 		doctype html
 		html(lang="en")
 		  head
 		    title= pageTitle
 		  body
-		  «genNodes(nodes.head)»
+		  «genNodes(node)»
 	'''
       
     def CharSequence genNodes(Node n)'''

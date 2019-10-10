@@ -2,19 +2,47 @@ grammar com.softtek.mxml.Mxml with org.eclipse.xtext.common.Terminals
 
 generate mxml "http://www.softtek.com/mxml/Mxml"
 
+
+
 Model:
+  (project=Project)?
+  (files+=File)* 
+;
+
+FileRef:
+	'file' file_ref=[Node|QualifiedName] path_ref=STRING
+;
+ 
+Project :
+ 'project' name=ID '{' 
+ 	'description' ':' title=STRING
+ 	(files += FileRef)+
+ '}'
+;
+
+File:
 	initialnode=INITNODE
 	nodes+=Node*;
 	
+QualifiedName:
+  ID ('.' ID)*
+;
+
 terminal INITNODE:
     '<?' -> '?>'
 ;
 
+
 @Override
 terminal ML_COMMENT:
-    (('<!--'|'<![') -> ('-->'|']]>') ) //| '<'ID':Script>' -> '</'ID':Script>')
+    (('<!--'|'<![') -> ('-->'|']]>') )  //| '<'ID':Script>' -> '</'ID':Script>')
  ;
-    
+
+@Override
+terminal SL_COMMENT: 
+    '[' !('\n'|'\r')* ('\r'? '\n')?
+;
+
 @Override 
 terminal ID: 
     ('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'|'0'..'9'|'.')*; 
