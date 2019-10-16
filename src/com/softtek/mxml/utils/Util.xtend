@@ -3,6 +3,7 @@ package com.softtek.mxml.utils
 import com.softtek.mxml.mxml.Node
 import java.util.LinkedHashMap
 import java.util.LinkedHashSet
+import com.softtek.mxml.mxml.ComplexNode
 
 class Util {	
 	
@@ -26,6 +27,14 @@ class Util {
 				identation += "   "
 			}
 		return identation
+	}
+	
+	def LinkedHashMap<String, String> getNodeAttrMap(Node n){
+		var LinkedHashMap<String, String> attrs = new LinkedHashMap<String, String>()
+			for( a : n.attrs.toList){
+				attrs.put(a.key, a.value)
+			}
+		return attrs
 	}
 	
 	def void getAppTagsAttrs(Node node, LinkedHashMap<String, LinkedHashSet<String>> app){
@@ -60,6 +69,40 @@ class Util {
 			}
 		}
 	}
-
-	
+    
+    def LinkedHashMap<String, String> getNameSpaceLocation(LinkedHashMap<String, String> nsl, Node node){
+    	var LinkedHashMap<String, String> aux = new LinkedHashMap<String, String>()
+    	aux.putAll(nsl)    		
+	    	if (node instanceof ComplexNode){	
+	    		aux.putAll(lookNodeNameSpaceLocation(node))
+		  		var innernode = node as ComplexNode
+		  		for(i: innernode.nodes){
+		  			aux.putAll(lookNodeNameSpaceLocation(i))
+		  		}			  	
+			}else{
+				aux.putAll(lookNodeNameSpaceLocation(node))
+			}
+    	return aux
+    }
+    
+    def LinkedHashMap<String, String> lookNodeNameSpaceLocation(Node node){
+    	var LinkedHashMap<String, String> aux = new LinkedHashMap<String, String>()
+    	    for(attr : node.attrs){
+    	    	if(attr.ns!==null && attr.ns.equals('xmlns') ){
+    	    		aux.put(attr.key, attr.value.replace(".","/"))
+    	    	}
+    	    }
+    	return aux
+    }
+    
+    def String getConcatAttrs(Node node){
+    	var String attrs = ""
+    	if(!node.attrs.empty){
+    		for(attr : node.attrs){
+    			attrs += " " + attr.key + ":\"" + attr.value  + "\""     			
+    		}
+    	}
+    	return attrs
+    }
+    	
 }
