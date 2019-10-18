@@ -29,7 +29,7 @@ class PugGenerator {
 		this.fname = fname
 		nsl =  new LinkedHashMap<String, String>()
       	nsl.putAll(util.getNameSpaceLocation(nsl, node))      	
-		fsa.generateFile("pug/"+path+"/"+fname+".pug", genNodes(-2, node))				
+		fsa.generateFile("pug/"+path+"/"+fname+".pug", genNodes(-2, node) + "\nscript(src=\'"+fname+".js\')")				
 	}
 	
 //	def CharSequence genPugFile(Node node) '''	

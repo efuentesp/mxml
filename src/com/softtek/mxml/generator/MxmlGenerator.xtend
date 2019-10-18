@@ -10,6 +10,7 @@ import org.eclipse.xtext.generator.IGeneratorContext
 import com.softtek.mxml.mxml.Node
 import com.softtek.mxml.generator.HtmlGenerator
 import com.softtek.mxml.generator.PugGenerator
+import com.softtek.mxml.generator.JsonResourceGenerator
 import com.softtek.mxml.mxml.ComplexNode
 import com.softtek.mxml.mxml.Project
 import com.softtek.mxml.utils.Util
@@ -24,12 +25,13 @@ import java.util.LinkedHashSet
 class MxmlGenerator extends AbstractGenerator {
   HtmlGenerator htmlGenerator= new HtmlGenerator()
   PugGenerator pugGenerator= new PugGenerator()
+  JsonResourceGenerator jsonResourceGenerator= new JsonResourceGenerator()
   AppComponentListGenerator appComponentListGenerator = new AppComponentListGenerator()
   
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		 pugGenerator.doGenerator(resource,fsa)	
 		 appComponentListGenerator.doGenerator(resource,fsa) 
-		 		  		   
+		 jsonResourceGenerator.doGenerator(resource,fsa)		  		   
 //		fsa.generateFile('greetings.txt', 'People to greet: ' + 
 //			resource.allContents
 //				.filter(Greeting)

@@ -19,12 +19,10 @@ class PugElementGenerator {
 	html(lang="en")
 	   head
 	      title «fname»
-	   body
-	''' 
-	
+	   body''' 
+	   
 	def String genLabel(int indentation, Node n)'''		
-		«util.getIndentation(indentation)»label«this.getIdTag(n)»
-		«IF !n.attrs.empty»«util.getIndentation(indentation+1)»p«util.getConcatAttrs(n)»«ENDIF»
+		«util.getIndentation(indentation)»label«this.getIdTag(n)» « getText(n)»
 	'''
 	
 	def String genButton(int indentation, Node n)'''		
