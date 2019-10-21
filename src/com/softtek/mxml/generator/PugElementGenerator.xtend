@@ -35,27 +35,22 @@ class PugElementGenerator {
 	
 	def String genRemoteObject(int indentation, Node n)'''
 		«util.getIndentation(indentation)».RemoteObject
-		«IF !n.attrs.empty»«util.getIndentation(indentation+1)»p«util.getConcatAttrs(n)»«ENDIF»
 	'''
 	
 	def String genMethod(int indentation, Node n)'''
 		«util.getIndentation(indentation)».method
-		«IF !n.attrs.empty»«util.getIndentation(indentation+1)»p«util.getConcatAttrs(n)»«ENDIF»
 	'''
 	
 	def String genState(int indentation, Node n)'''
 		«util.getIndentation(indentation)».State
-		«IF !n.attrs.empty»«util.getIndentation(indentation+1)»p«util.getConcatAttrs(n)»«ENDIF»
 	'''
 	
 	def String genVBox(int indentation, Node n)'''
 		«util.getIndentation(indentation)».VBox
-		«IF !n.attrs.empty»«util.getIndentation(indentation+1)»p«util.getConcatAttrs(n)»«ENDIF»
 	'''
 	
 	def String genHBox(int indentation, Node n)'''
 		«util.getIndentation(indentation)».HBox
-		«IF !n.attrs.empty»«util.getIndentation(indentation+1)»p«util.getConcatAttrs(n)»«ENDIF»
 	'''
 	
 	def String genTextInput(int indentation, Node n)'''
@@ -64,12 +59,10 @@ class PugElementGenerator {
 	
 	def String genImage(int indentation, Node n)'''
 		«util.getIndentation(indentation)».image
-		«IF !n.attrs.empty»«util.getIndentation(indentation+1)»p«util.getConcatAttrs(n)»«ENDIF»
 	'''
 	
 	def String genManager(int indentation, Node n)'''
 		«util.getIndentation(indentation)».manager
-		«IF !n.attrs.empty»«util.getIndentation(indentation+1)»p«util.getConcatAttrs(n)»«ENDIF»
 	'''
 	
 	def String genComponente(int indentation, Node n)'''
@@ -106,7 +99,7 @@ class PugElementGenerator {
 	def String getText(Node node){
 		var text = ""
 		if (util.getNodeAttrValue(node,"text") !== null && !util.getNodeAttrValue(node,"text").equalsIgnoreCase("")){
-			text = util.getNodeAttrValue(node,"text") + " \""
+			text = "\"" + util.getNodeAttrValue(node,"text") + " \""
 		}
 		return text
 	}
