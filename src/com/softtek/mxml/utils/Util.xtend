@@ -99,7 +99,7 @@ class Util {
     	var String attrs = ""
     	if(!node.attrs.empty){
     		for(attr : node.attrs){
-    			attrs += " " + attr.key + ":\"" + attr.value  + "\""     			
+    			attrs += " " + attr.key + "=\"" + attr.value  + "\""     			
     		}
     	}
     	return attrs

@@ -53,7 +53,7 @@ class PugGenerator {
 	
 	def CharSequence getScriptFromNode(LinkedHashMap<String, String> nsl,Node n)'''
 	    «IF n.prefix.equals('views') || n.prefix.equals('view')»
-		 script(src='pug/« IF nsl.get("views") !== null»«nsl.get("views").replace("*", n.name.trim)»« ELSEIF nsl.get("view") !== null»«nsl.get("view").replace("*", n.name.trim)»«ENDIF».js')
+		 script(src='« IF nsl.get("views") !== null»«nsl.get("views").replace("*", n.name.trim)»« ELSEIF nsl.get("view") !== null»«nsl.get("view").replace("*", n.name.trim)»«ENDIF».js')
         «ENDIF»
 	'''
     

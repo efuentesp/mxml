@@ -21,16 +21,121 @@ class PugElementGenerator {
 	      title «fname»
 	   body''' 
 	   
+	//Text
+	
 	def String genLabel(int indentation, Node n)'''		
 		«util.getIndentation(indentation)»label«this.getIdTag(n)» « getText(n)»
 	'''
+	
+	def String genText(int indentation, Node n)'''		
+		«util.getIndentation(indentation)»text«this.getIdTag(n)» « getLabel(n)»
+	'''
+		
+	def String genTextInput(int indentation, Node n)'''
+		«util.getIndentation(indentation)»input(type="text" «util.getConcatAttrs(n)»)
+	'''
+	
+	def String genTextArea(int indentation, Node n)'''
+		«util.getIndentation(indentation)»textarea( «util.getConcatAttrs(n)»)
+	'''
+	
+	//Buttons
 	
 	def String genButton(int indentation, Node n)'''		
 		«util.getIndentation(indentation)»button«this.getIdTag(n)»«IF !this.getOnClick(n).equalsIgnoreCase("")»(«this.getOnClick(n)»)«ENDIF»«IF !this.getLabel(n).equalsIgnoreCase("")» «this.getLabel(n)»«ENDIF»
 	'''
 	
+	def String genLinkButton(int indentation, Node n)'''
+		«util.getIndentation(indentation)»a(href="#"): button(class="linkButton" type="button")«IF !this.getLabel(n).equalsIgnoreCase("")» «this.getLabel(n)»«ENDIF»
+	'''
+	
+	def String genRadioButton(int indentation, Node n)'''		
+		«util.getIndentation(indentation)»input(type="radio" «util.getConcatAttrs(n)» )
+		| «IF !this.getLabel(n).equalsIgnoreCase("")» «this.getLabel(n)»«ENDIF»
+	'''
+	
+	def String genCheckBoxButton(int indentation, Node n)'''		
+		«util.getIndentation(indentation)»input(type="checkbox" «util.getConcatAttrs(n)» ) 
+		| «IF !this.getLabel(n).equalsIgnoreCase("")» «this.getLabel(n)»«ENDIF»
+    '''
+	
+	// Value Selectors
+	
+	def String genHSLider(int indentation, Node n)'''
+		«util.getIndentation(indentation)»input(type="range" class="hSlider" «util.getConcatAttrs(n)»)
+	'''
+	
+	def String genVSLider(int indentation, Node n)'''
+		«util.getIndentation(indentation)»input(type="range" class="vSlider" «util.getConcatAttrs(n)»)
+	'''
+	
+	def String genNumericStepper(int indentation, Node n)'''
+		«util.getIndentation(indentation)»input(type="number" «util.getConcatAttrs(n)»)
+	'''
+	
+	def String genColorPicker(int indentation, Node n)'''
+		«util.getIndentation(indentation)»input(type="color" «util.getConcatAttrs(n)»)
+	'''
+	
+	def String genDateField(int indentation, Node n)'''
+		«util.getIndentation(indentation)»input(type="date" «util.getConcatAttrs(n)»)
+	'''
+	
+	def String genDateChooser(int indentation, Node n)'''
+		«util.getIndentation(indentation)»input(type="date" «util.getConcatAttrs(n)»)
+	'''
+	
+ 
+	 // Lists
+	 
+	def String genList(int indentation, Node n)'''
+		«util.getIndentation(indentation)»select(size="3" «util.getConcatAttrs(n)»)
+		«util.getIndentation(indentation+1)»option(value="A") A
+		«util.getIndentation(indentation+1)»option(value="B") B
+		«util.getIndentation(indentation+1)»option(value="C") C
+	'''
+	 
+	def String genComboBox(int indentation, Node n)'''
+		«util.getIndentation(indentation)»select(«util.getConcatAttrs(n)»)
+		«util.getIndentation(indentation+1)»option(value="A") A
+		«util.getIndentation(indentation+1)»option(value="B") B
+		«util.getIndentation(indentation+1)»option(value="C") C
+	'''
+	 
+	def String genDataGrid(int indentation, Node n)'''
+		«util.getIndentation(indentation)»table(class="dataGrid" «util.getConcatAttrs(n)»)
+		«util.getIndentation(indentation+1)»thead
+		«util.getIndentation(indentation+2)»tr(class="gridRow")
+		«util.getIndentation(indentation+3)»th(class="dataGridHeader"): span City
+		«util.getIndentation(indentation+1)»tbody
+		«util.getIndentation(indentation+2)»tr(class="gridRow")
+		«util.getIndentation(indentation+3)»td(class="gridItem"): span Los Angeles
+	'''
+	 
+	def String genTileList(int indentation, Node n)'''
+		«util.getIndentation(indentation)»select(size="3" «util.getConcatAttrs(n)»)
+		«util.getIndentation(indentation+1)»option(value="A") A
+		«util.getIndentation(indentation+1)»option(value="B") B
+		«util.getIndentation(indentation+1)»option(value="C") C
+	'''
+	 
+	def String genHorizontalList(int indentation, Node n)'''
+		«util.getIndentation(indentation)»select(class="hList" size="3" «util.getConcatAttrs(n)»)
+		«util.getIndentation(indentation+1)»option(value="A") A
+		«util.getIndentation(indentation+1)»option(value="B") B
+		«util.getIndentation(indentation+1)»option(value="C") C
+	'''
+	 
+	def String genTree(int indentation, Node n)'''
+		«util.getIndentation(indentation)»ul(class="treeView" «util.getConcatAttrs(n)»)
+		«util.getIndentation(indentation+1)»li: span(class="caret") Beverages
+		«util.getIndentation(indentation+2)»ul(class="nested")
+	'''
+	 
+	// Other
+	 
 	def String genView(int indentation, Node n, LinkedHashMap<String, String> nsl)'''		
-		«util.getIndentation(indentation)»include pug/«IF nsl.get("views") !== null»«nsl.get("views").replace("*", n.name)»«ELSEIF nsl.get("view") !== null»«nsl.get("view").replace("*", n.name)»«ENDIF».pug
+		«util.getIndentation(indentation)»include «IF nsl.get("views") !== null»«nsl.get("views").replace("*", n.name)»«ELSEIF nsl.get("view") !== null»«nsl.get("view").replace("*", n.name)»«ENDIF».pug
 	'''
 	
 	def String genRemoteObject(int indentation, Node n)'''
@@ -51,10 +156,6 @@ class PugElementGenerator {
 	
 	def String genHBox(int indentation, Node n)'''
 		«util.getIndentation(indentation)».HBox
-	'''
-	
-	def String genTextInput(int indentation, Node n)'''
-		«util.getIndentation(indentation)»input(type="text", name="")
 	'''
 	
 	def String genImage(int indentation, Node n)'''
