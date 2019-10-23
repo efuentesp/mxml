@@ -132,11 +132,130 @@ class PugElementGenerator {
 		«util.getIndentation(indentation+2)»ul(class="nested")
 	'''
 	 
-	// Other
+	 
+	// Advanced 
+	
+	def String genAdvancedDataGrid(int indentation, Node n)'''
+		«util.getIndentation(indentation)»table(class="dataGrid" «util.getConcatAttrs(n)»)
+		«util.getIndentation(indentation+1)»thead
+		«util.getIndentation(indentation+2)»tr(class="gridRow")
+		«util.getIndentation(indentation+3)»th(class="dataGridHeader"): span City
+		«util.getIndentation(indentation+1)»tbody
+		«util.getIndentation(indentation+2)»tr(class="gridRow")
+		«util.getIndentation(indentation+3)»td(class="gridItem"): span Los Angeles
+	'''
+	
+	// Media and Progress
+	
+	def String genImage(int indentation, Node n)'''
+		«util.getIndentation(indentation)»div(class="image")
+	'''
+	
+	def String genSWFLoader(int indentation, Node n)'''
+		«util.getIndentation(indentation)»div(class="sWFLoader")
+	'''
+	
+	// Control Bar
+	
+	def String genControlBar(int indentation, Node n)'''
+		«util.getIndentation(indentation)»div(class="controlBar")
+	'''
+	
+	def String genApplicationControlBar(int indentation, Node n)'''
+		«util.getIndentation(indentation)»div(class="applicationControlBar")
+	'''
+	
+	// Navigators
+	
+	def String genAccordion(int indentation, Node n)'''
+		«util.getIndentation(indentation)»button(class="accordion") Section 1
+		«util.getIndentation(indentation)»div(class="accordion-panel")
+		«util.getIndentation(indentation)»p contents
+	'''
+	
+	def String genToggleButtonBar(int indentation, Node n)'''
+		«util.getIndentation(indentation)»div(class="toggleButtonBar")
+	'''
+	
+	def String genMenuBar(int indentation, Node n)'''
+		«util.getIndentation(indentation)»div(class="menuBar")
+	'''
+	
+	def String genTabNavigator(int indentation, Node n)'''
+		«util.getIndentation(indentation)»ul(class="tabs")
+		«util.getIndentation(indentation+1)»li: a(href="#tab1") Nunc tincidunt
+		«util.getIndentation(indentation)»div(class="tab_container")
+		«util.getIndentation(indentation+1)»div(class="tab_content" id="tab1")
+	'''
+	
+	// Pop ups
+	
+	def String genPopUpButton(int indentation, Node n)'''
+	    «util.getIndentation(indentation)»div(id="popup" style="display: none;")
+	         «util.getIndentation(indentation+1)»div(class="content-popup")
+	            «util.getIndentation(indentation+2)»div(class="close"): a(href="#" id="close") X
+	            «util.getIndentation(indentation+2)»div
+	               «util.getIndentation(indentation+3)»contents
+	               «util.getIndentation(indentation+3)»contents
+	               «util.getIndentation(indentation+3)»div(style="float:left; width:100%;")
+	    «util.getIndentation(indentation)»div(class="popup-overlay")
+        «util.getIndentation(indentation)»button(type="button" id="open") Nombre PopUpButton
+	'''
+	
+	def String genPopUpMenuButton(int indentation, Node n)'''
+		«util.getIndentation(indentation)»div(class="popUpMenuButton")
+	'''
+	
+	// Containers
+	
+	def String genHBox(int indentation, Node n)'''
+		«util.getIndentation(indentation)»div(class="hBox")
+	'''
+	
+	def String genVBox(int indentation, Node n)'''
+		«util.getIndentation(indentation)»div(class="vBox")
+	'''
+	
+	def String genCanvas(int indentation, Node n)'''
+		«util.getIndentation(indentation)»div(class="canvas")
+	'''
+	
+	def String genVDividedBox(int indentation, Node n)'''
+		«util.getIndentation(indentation)»div(class="vDividedBox")
+		«util.getIndentation(indentation+1)»div(class="vDivider")
+	'''
+	
+	def String genHDividedBox(int indentation, Node n)'''
+		«util.getIndentation(indentation)»div(class="hDividedBox")
+		«util.getIndentation(indentation+1)»div(class="hDivider")
+	'''
+	
+	def String genPanel(int indentation, Node n)'''
+		«util.getIndentation(indentation)»div(class="panel")
+		«util.getIndentation(indentation+1)»div(class="panelTitle")
+		«util.getIndentation(indentation+1)»p Panel Title
+		«util.getIndentation(indentation+1)»div(class="panelContent")
+	'''
+	
+	def String genTile(int indentation, Node n)'''
+		«util.getIndentation(indentation)»div(class="tile")
+	'''
+	
+	def String genForm(int indentation, Node n)'''
+		«util.getIndentation(indentation)»div(class="form")
+		«util.getIndentation(indentation+1)»form(id="id")
+		«util.getIndentation(indentation+2)»div(class="formTitle")
+		«util.getIndentation(indentation+3)»p Form Title
+		«util.getIndentation(indentation+2)»div(class="formContent")
+	'''
+	  
+	// Include
 	 
 	def String genView(int indentation, Node n, LinkedHashMap<String, String> nsl)'''		
 		«util.getIndentation(indentation)»include «IF nsl.get("views") !== null»«nsl.get("views").replace("*", n.name)»«ELSEIF nsl.get("view") !== null»«nsl.get("view").replace("*", n.name)»«ENDIF».pug
 	'''
+	
+	// Other
 	
 	def String genRemoteObject(int indentation, Node n)'''
 		«util.getIndentation(indentation)».RemoteObject
@@ -148,18 +267,6 @@ class PugElementGenerator {
 	
 	def String genState(int indentation, Node n)'''
 		«util.getIndentation(indentation)».State
-	'''
-	
-	def String genVBox(int indentation, Node n)'''
-		«util.getIndentation(indentation)».VBox
-	'''
-	
-	def String genHBox(int indentation, Node n)'''
-		«util.getIndentation(indentation)».HBox
-	'''
-	
-	def String genImage(int indentation, Node n)'''
-		«util.getIndentation(indentation)».image
 	'''
 	
 	def String genManager(int indentation, Node n)'''
