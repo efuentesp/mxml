@@ -16,6 +16,7 @@ import com.softtek.mxml.mxml.Project
 import com.softtek.mxml.utils.Util
 import java.util.LinkedHashMap
 import java.util.LinkedHashSet
+import com.softtek.mxml.utils.State
 
 /**
  * Generates code from your model files on save.
@@ -27,11 +28,30 @@ class MxmlGenerator extends AbstractGenerator {
   PugGenerator pugGenerator= new PugGenerator()
   JsonResourceGenerator jsonResourceGenerator= new JsonResourceGenerator()
   AppComponentListGenerator appComponentListGenerator = new AppComponentListGenerator()
+  PugStateGenetator pugStateGenerator = new PugStateGenetator()
+  
+  var LinkedHashMap<String,LinkedHashSet<State>> appStates;	
+  
+  Util util = new Util()
   
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		 pugGenerator.doGenerator(resource,fsa)	
 		 appComponentListGenerator.doGenerator(resource,fsa) 
-		 jsonResourceGenerator.doGenerator(resource,fsa)		  		   
+		 jsonResourceGenerator.doGenerator(resource,fsa)		
+		 appStates = new LinkedHashMap<String,LinkedHashSet<State>>()
+		 appStates = util.getAppStates(resource)
+		 if(!appStates.empty){
+			for(entry : this.appStates.entrySet){
+				println("--------- fname: " + entry.key + " ---------")
+				for(state : entry.value){
+					println("----> state: " + state.name)
+					for(flexOverride : state.flexOverrides){
+						println("--> override: " + flexOverride.type )
+					}
+				}
+			}
+		}
+		 
 //		fsa.generateFile('greetings.txt', 'People to greet: ' + 
 //			resource.allContents
 //				.filter(Greeting)

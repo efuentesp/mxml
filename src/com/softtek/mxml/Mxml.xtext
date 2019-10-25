@@ -38,6 +38,7 @@ terminal ML_COMMENT:
     (('<!--'|'<![') -> ('-->'|']]>') )  //| '<'ID':Script>' -> '</'ID':Script>')
  ;
 
+
 @Override
 terminal SL_COMMENT: 
     '[' !('\n'|'\r')* ('\r'? '\n')?
@@ -45,7 +46,7 @@ terminal SL_COMMENT:
 
 @Override 
 terminal ID: 
-    ('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'|'0'..'9'|'.')*; 
+    ('a'..'z'|'A'..'Z'|'0'..'9') ('a'..'z'|'A'..'Z'|'0'..'9'|'@'| '_' |'.')*; 
 
 Node:
  (SimpleNodeNoPrefix | SimpleNode | ComplexNodeNoPrefix | ComplexNode)

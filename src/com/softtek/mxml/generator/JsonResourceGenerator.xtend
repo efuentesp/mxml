@@ -64,8 +64,7 @@ class JsonResourceGenerator {
     	if(!node.attrs.empty){
     		for(attr : node.attrs){
     			if(attr.value.contains("resourceManager.getString")){
-    			  var value=Arrays.toString(attr.value.split(",").tail).replace("\'","").replace(")","").replace("}","").replace("[","").replace("]","")
-    	          println(value)
+    			  var value=Arrays.toString(attr.value.split(",").tail).replace("\'","").replace(")","").replace("}","").replace("[","").replace("]","")    	          
     	          return "\"" +util.getNodeAttrValue(node,"id") + "\"" + ":"+ "\""+value+"\","
     	        }   			
     		}

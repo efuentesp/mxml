@@ -12,31 +12,35 @@ f= open("projectMXML.mxml","w+")
 f.write("project Project { \r")
 f.write("\t description: \"Some Description\"\r")
 rootDir = '.'
+counter = 0
 for dirName, subdirList, fileList in os.walk(rootDir):
     print('Found directory: %s' % dirName)
     for fname in fileList:
         if fname.endswith(".mxml") and not fname.startswith("projectMXML.mxml") and not dirName.startswith(".\out") :
             print('\t%s' % fname)
-            f.write("\t file %s " % fname.split(".")[0] + " \"%s\"  \r" % dirName.replace("\\","/") )
+            counter=counter + 1
+            f.write("\t file %s " % (str(counter).rstrip() + "@_" + fname.split(".")[0]) +" \"%s\"  \r" % dirName.replace("\\","/") )
 f.write("} \r")
 f.close() 
 
 ##Updates each mxml file with a node called filename:PhysicalCurrentName
 
 rootDir = '.'
+counter = 0
 for dirName, subdirList, fileList in os.walk(rootDir):
     print('Found directory: %s' % dirName)
     for fname in fileList:
         if fname.endswith(".mxml") and not fname.startswith("projectMXML.mxml") and not alreadyProcessed :
             print('\t%s' % fname)
+            counter=counter + 1
             f = open(dirName+"\\"+fname, "r")
             contents = f.readlines()
             f.close()
-            contents.insert(1, "<filename:" + fname.split(".")[0] +">\r")
+            contents.insert(1, "<filename:" +  str(counter) + "@_" + fname.split(".")[0] + ">\r")
             f = open(dirName+"\\"+fname, "w")
             contents = "".join(contents)
             f.write(contents+"\r")
-            f.write("</filename:" + fname.split(".")[0] +">\r")
+            f.write("</filename:" + str(counter) + "@_" + fname.split(".")[0] + ">\r")
             f.close()
          
    
@@ -55,10 +59,13 @@ if not os.path.exists('out'):
             
 rootDir = '.'
 outDir = '.\out'
+counter = 0
 
 for dirName, subdirList, fileList in os.walk(rootDir):
-    print('Found directory: %s' % dirName)
+    print('Found directory OUT: %s' % dirName)
     for fname in fileList:
         if fname.endswith(".mxml") and not dirName.startswith(".\out") :
-            print('\t%s' % fname)
-            copyfile(dirName+"\\"+fname, outDir+"\\"+fname)
+            print('\t%s' % fname)            
+            copyfile(dirName+"\\"+fname, outDir+"\\"+str(counter) + "@_" +fname)
+            counter=counter + 1
+            
