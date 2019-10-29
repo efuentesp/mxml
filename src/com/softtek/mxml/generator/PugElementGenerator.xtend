@@ -1,30 +1,31 @@
 package com.softtek.mxml.generator
 
-import org.eclipse.xtext.generator.IFileSystemAccess2
-import org.eclipse.xtext.generator.IGeneratorContext
-import org.eclipse.emf.ecore.resource.Resource
 import com.softtek.mxml.mxml.Node
-import java.util.List
-import com.softtek.mxml.mxml.ComplexNode
-import com.softtek.mxml.mxml.Project
 import com.softtek.mxml.utils.Util
 import java.util.LinkedHashMap
 
 class PugElementGenerator {
 	
 	Util util = new Util()
-	
+	var i18nextScripts = "script(src=\'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js\')\n"
+                       + "script(src=\'https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.0/jquery-i18next.min.js')\n"
+                       + "script(src=\'https://unpkg.com/i18next/i18next.js')\n"
+                       + "script(src=\'https://unpkg.com/i18next-xhr-backend/i18nextXHRBackend.js')\n"
+                       + "script(src=\'i18nextScript.js')\n"
+                       
 	def CharSequence genApp(Node n, String fname)'''
 	doctype html
 	html(lang="en")
 	   head
+	      «i18nextScripts»
 	      title «fname»
 	   body''' 
 	   
 	//Text
 	
 	def String genLabel(int indentation, Node n)'''		
-		«util.getIndentation(indentation)»label«this.getIdTag(n)» « getText(n)»
+		«««util.getIndentation(indentation)»label«this.getIdTag(n)» « getText(n)»
+		«util.getIndentation(indentation)»label(«util.getConcatAttrs(n)»)
 	'''
 	
 	def String genText(int indentation, Node n)'''		
@@ -42,7 +43,8 @@ class PugElementGenerator {
 	//Buttons
 	
 	def String genButton(int indentation, Node n)'''		
-		«util.getIndentation(indentation)»button«this.getIdTag(n)»«IF !this.getOnClick(n).equalsIgnoreCase("")»(«this.getOnClick(n)»)«ENDIF»«IF !this.getLabel(n).equalsIgnoreCase("")» «this.getLabel(n)»«ENDIF»
+		«««util.getIndentation(indentation)»button«this.getIdTag(n)»«IF !this.getOnClick(n).equalsIgnoreCase("")»(«this.getOnClick(n)»)«ENDIF»«IF !this.getLabel(n).equalsIgnoreCase("")» «this.getLabel(n)»«ENDIF»
+	    «util.getIndentation(indentation)»button(«util.getConcatAttrs(n)»)
 	'''
 	
 	def String genLinkButton(int indentation, Node n)'''

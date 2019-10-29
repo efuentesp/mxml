@@ -4,49 +4,57 @@ import org.eclipse.emf.ecore.resource.Resource
 import com.softtek.mxml.mxml.Node
 import com.softtek.mxml.mxml.ComplexNode
 import com.softtek.mxml.mxml.Project
-import java.util.Arrays
 import com.softtek.mxml.utils.Util
+import java.util.HashSet
+import java.util.Set
 
 class JsonResourceGenerator {
 	
 	Util util = new Util()
 	
+	Set<String> jsonList = new HashSet<String>()
+	var json=""
+	
 	def doGenerator(Resource r, IFileSystemAccess2 fsa) {
-       for (p : r.allContents.toIterable.filter(typeof(Project))){
+	   for (p : r.allContents.toIterable.filter(typeof(Project))){
 		for (m: p.files){
-			 m.file_ref.generateCodeByNode(m.file_ref.name,m.path_ref,fsa)
+			 json = m.file_ref.generateCodeByNode(m.file_ref.name,m.path_ref)
 		}
 	   }
+	   fsa.generateFile("pug/"+"langs/en-US.json", "{\n" + createJsonFormSet(jsonList) + "\n}")
+	   fsa.generateFile("pug/"+"i18nextScript.js", geni18nextScript())
 	}
 	
-	def void generateCodeByNode(Node node, String fname, String path,IFileSystemAccess2 fsa) {	
+	def CharSequence createJsonFormSet(Set<String> jsonList)'''
+	«FOR j: jsonList SEPARATOR ','»
+		 «j»
+	«ENDFOR»
+	'''
+	
+	def String generateCodeByNode(Node node, String fname, String path) {	
 		var json=genJsonFromNode(-2, node).toString
 		if (json.length>0){
-		  fsa.generateFile("pug/"+path+"/"+fname+".js", getScript(json))
+		  return json
 		}				
 	}
   
-    def CharSequence getScript(String json)'''
-      json={
-       «json.substring(0, json.length() - 3)»
-      }
-      
-      function getText(){
-         for (var key in json) {
-          console.log(key);
-          console.log(json[key]); 
-          if (document.getElementById(key)!==null)
-           if (key!==null)
-             document.getElementById(key).innerText=json[key]
-          }
-      }
-      
-      getText()
+    def CharSequence geni18nextScript()'''
+      i18next.use(window.i18nextXHRBackend)
+          .init({
+      	   debug: true,
+      	   //whitelist: ['en-US', 'es'],
+      	   fallbackLng: 'en-US',
+      	   backend: {
+      		  loadPath: 'langs/{{lng}}.json'
+      	   }
+           }, (err, t) => {
+      	    jqueryI18next.init(i18next, $);
+      	    $('html').localize();
+      });
     '''
     
     def CharSequence genJsonFromNode (int indentation, Node n)'''
-		«IF (n instanceof ComplexNode)»		  		  
-		  «getJsonFromNodeAttrs(indentation, n)»
+		«IF (n instanceof ComplexNode)»		  	
 		  «var innernode = n as ComplexNode»
 		  «FOR i: innernode.nodes»
 		  	«IF  n.name.equalsIgnoreCase('Application')»
@@ -60,16 +68,22 @@ class JsonResourceGenerator {
 		«ENDIF»
 	'''
     
-    def String getJsonFromNodeAttrs(int indentation,Node node){
+     def String getJsonFromNodeAttrs(int indentation,Node node){
     	if(!node.attrs.empty){
     		for(attr : node.attrs){
     			if(attr.value.contains("resourceManager.getString")){
-    			  var value=Arrays.toString(attr.value.split(",").tail).replace("\'","").replace(")","").replace("}","").replace("[","").replace("]","")    	          
-    	          return "\"" +util.getNodeAttrValue(node,"id") + "\"" + ":"+ "\""+value+"\","
+    			  jsonList.add(setJsonKeyValue(attr.value))
+    			  return setJsonKeyValue(attr.value)
     	        }   			
     		}
     	}
     	return ""
+    }
+  
+    
+    def String setJsonKeyValue(String value){
+    	 var fname= util.getResourceFileNameFromAttrs(value)
+    	 return  "\"" + fname +"\"" + ":{"+ "\"" +util.getResourceNameFromAttrs(value)+ "\"" + ":"+ "\""+util.getResourceNameFromAttrs(value)+"\"}"       
     }
    
 }

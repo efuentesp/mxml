@@ -29,33 +29,9 @@ class PugGenerator {
 		this.fname = fname
 		nsl =  new LinkedHashMap<String, String>()
       	nsl.putAll(util.getNameSpaceLocation(nsl, node))   
-   	    var scripts = genScriptFromViewNames(node).toString
-   	    var localscript = "script(src=\'" + node.name + ".js')\n"
-        
-		fsa.generateFile("pug/"+path+"/"+fname+".pug", genNodes(-2, node) + localscript + scripts)				
+        fsa.generateFile("pug/"+path+"/"+fname+".pug", genNodes(-2, node))			
 	}
-	
-//	def CharSequence genPugFile(Node node) '''	
-//		«genNodes(0, node)»
-//	'''
-    
-    def CharSequence genScriptFromViewNames(Node n)'''
-		«IF (n instanceof ComplexNode)»		  		  
-		  «getScriptFromNode(this.nsl,n)»
-		  «var innernode = n as ComplexNode»
-		  «FOR i: innernode.nodes»
-		  		«genScriptFromViewNames(i)»
-		  «ENDFOR»
-		«ELSE»
-		   «getScriptFromNode(this.nsl,n)»
-		«ENDIF»
-	'''
-	
-	def CharSequence getScriptFromNode(LinkedHashMap<String, String> nsl,Node n)'''
-	    «IF n.prefix.equals('views') || n.prefix.equals('view')»
-		 script(src='« IF nsl.get("views") !== null»«nsl.get("views").replace("*", n.name.trim)»« ELSEIF nsl.get("view") !== null»«nsl.get("view").replace("*", n.name.trim)»«ENDIF».js')
-        «ENDIF»
-	'''
+
     
     def CharSequence genNodes(int indentation, Node n)'''
 		«IF (n instanceof ComplexNode)»		  		  

@@ -104,7 +104,11 @@ class Util {
     	var String attrs = ""
     	if(!node.attrs.empty){
     		for(attr : node.attrs){
-    			attrs += " " + attr.key + "=\"" + attr.value  + "\""     			
+    			if(attr.value.contains("resourceManager.getString")){
+    			 attrs += " " + "data-i18n" + "=\"" + getResourceFileNameFromAttrs(attr.value)+"."+getResourceNameFromAttrs(attr.value) + "\""  
+    			}
+    			else
+    			 attrs += " " + attr.key + "=\"" + attr.value  + "\""    			
     		}
     	}
     	return attrs
@@ -242,6 +246,20 @@ class Util {
 		state.addFlexOverride(flexOverride)
 	}
     
+    // Resources
+    def String getResourceFileNameFromAttrs(String value){
+    	var fname   = value.split("\'").get(1).trim
+    	var ns_name = value.split("\'").get(3).trim
+    	var ns      = ns_name.replace(".","_").split("_").get(0)
+    	var name    = ns_name.replace(".","_").split("_").get(1)  
+    	return fname + "_" + ns  + "_" + name
+    }
     
+    
+    def String getResourceNameFromAttrs(String value){
+    	var ns_name = value.split("\'").get(3).trim
+    	var name    = ns_name.replace(".","_").split("_").get(1)           
+    	return name
+    }
     
 }
