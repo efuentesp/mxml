@@ -18,11 +18,11 @@ class JsonResourceGenerator {
 	def doGenerator(Resource r, IFileSystemAccess2 fsa) {
 	   for (p : r.allContents.toIterable.filter(typeof(Project))){
 		for (m: p.files){
-			 json = m.file_ref.generateCodeByNode(m.file_ref.name,m.path_ref)
+			 json = m.file_ref.generateCodeByNode(util.removeNameDecorator(m.file_ref.name),m.path_ref)
 		}
 	   }
-	   fsa.generateFile("pug/"+"langs/en-US.json", "{\n" + createJsonFormSet(jsonList) + "\n}")
-	   fsa.generateFile("pug/"+"i18nextScript.js", geni18nextScript())
+	   fsa.generateFile("dist/assets/i18n/langs/en.json", "{\n" + createJsonFormSet(jsonList) + "\n}")
+	   fsa.generateFile("dist/assets/i18n/i18nextScript.js", geni18nextScript())
 	}
 	
 	def CharSequence createJsonFormSet(Set<String> jsonList)'''
@@ -42,8 +42,8 @@ class JsonResourceGenerator {
       i18next.use(window.i18nextXHRBackend)
           .init({
       	   debug: true,
-      	   //whitelist: ['en-US', 'es'],
-      	   fallbackLng: 'en-US',
+      	   //whitelist: ['en', 'es'],
+      	   fallbackLng: 'en',
       	   backend: {
       		  loadPath: 'langs/{{lng}}.json'
       	   }

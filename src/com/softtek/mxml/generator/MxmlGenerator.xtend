@@ -3,19 +3,14 @@
  */
 package com.softtek.mxml.generator
 
+import com.softtek.mxml.mxml.ComplexNode
+import com.softtek.mxml.mxml.Node
+import java.util.LinkedHashMap
+import java.util.LinkedHashSet
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
-import com.softtek.mxml.mxml.Node
-import com.softtek.mxml.generator.HtmlGenerator
-import com.softtek.mxml.generator.PugGenerator
-import com.softtek.mxml.generator.JsonResourceGenerator
-import com.softtek.mxml.mxml.ComplexNode
-import com.softtek.mxml.mxml.Project
-import com.softtek.mxml.utils.Util
-import java.util.LinkedHashMap
-import java.util.LinkedHashSet
 import com.softtek.mxml.utils.State
 
 /**
@@ -27,31 +22,20 @@ class MxmlGenerator extends AbstractGenerator {
   HtmlGenerator htmlGenerator= new HtmlGenerator()
   PugGenerator pugGenerator= new PugGenerator()
   JsonResourceGenerator jsonResourceGenerator= new JsonResourceGenerator()
-  AppComponentListGenerator appComponentListGenerator = new AppComponentListGenerator()
-  PugStateGenetator pugStateGenerator = new PugStateGenetator()
+  AppComponentListGenerator appComponentListGenerator = new AppComponentListGenerator()  
+  JsStateGenerator jsStateGenerator = new JsStateGenerator()
   
   var LinkedHashMap<String,LinkedHashSet<State>> appStates;	
-  
-  Util util = new Util()
-  
+
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-		 pugGenerator.doGenerator(resource,fsa)	
-		 appComponentListGenerator.doGenerator(resource,fsa) 
-		 jsonResourceGenerator.doGenerator(resource,fsa)		
-		 appStates = new LinkedHashMap<String,LinkedHashSet<State>>()
-		 appStates = util.getAppStates(resource)
-		 if(!appStates.empty){
-			for(entry : this.appStates.entrySet){
-				println("--------- fname: " + entry.key + " ---------")
-				for(state : entry.value){
-					println("----> state: " + state.name)
-					for(flexOverride : state.flexOverrides){
-						println("--> override: " + flexOverride.type )
-					}
-				}
-			}
-		}
-		 
+		appStates = new LinkedHashMap<String,LinkedHashSet<State>>()
+		appStates = State.getAppStates(resource)	
+		pugGenerator.doGenerator(resource,fsa, appStates)	
+//		appComponentListGenerator.doGenerator(resource,fsa) 
+		jsonResourceGenerator.doGenerator(resource,fsa)	
+		if(appStates !== null && !appStates.empty){
+			jsStateGenerator.doGenerator(fsa, appStates)
+		}		 
 //		fsa.generateFile('greetings.txt', 'People to greet: ' + 
 //			resource.allContents
 //				.filter(Greeting)
