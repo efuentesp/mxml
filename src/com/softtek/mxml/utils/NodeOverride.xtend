@@ -2,6 +2,7 @@ package com.softtek.mxml.utils
 
 import java.util.ArrayList
 import com.softtek.mxml.mxml.Node
+import java.util.LinkedHashMap
 
 class NodeOverride {
 	
@@ -43,6 +44,10 @@ class NodeOverride {
 		return this.attrs
 	}
 	
+	def addAttr(AttrOverride attr){
+		this.attrs.add(attr)
+	}
+	
 	def static NodeOverride fromNodeToNodeOverride(Node node){
 		return new NodeOverride(node.prefix, node.name, AttrOverride.fromAttrToAttrOverride(node.attrs))
 	}
@@ -56,38 +61,63 @@ class NodeOverride {
     	var String attrs = ""
     	if(!node.attrs.empty){
     		for(attr : node.attrs){    				
-    			if(attr.value.contains("resourceManager.getString")){
-    			 attrs += " " + "data-i18n" + "=\"" + getResourceFileNameFromAttrs(attr.value)+"."+getResourceNameFromAttrs(attr.value) + "\""  
-    			}
-    			else{
+    			if (attr.value.contains("?resourceManager")) {    
+    			  attrs += " class=\"ternaryOperation\" data-i18n" + "=\"" + new Util().getFileNameAndResourceFromAttrs(attr.value).entrySet.get(0).value+"."+new Util().getFileNameAndResourceFromAttrs(attr.value).entrySet.get(0).key + "\""
+    			}else if (attr.value.contains("resourceManager")) {
+    				attrs += " " + "data-i18n" + "=\"" + new Util().getFileNameAndResourceFromAttrs(attr.value).entrySet.get(0).value+"."+new Util().getFileNameAndResourceFromAttrs(attr.value).entrySet.get(0).key + "\""    			    			
+    			}else{
     				if(attrToSkip !== null && !attrToSkip.empty){
     					if(!attrToSkip.contains(attr.key)){
     						attrs += " " + attr.key + "=\"" + attr.value  + "\""
     					}
-    				}else if( !attr.key.equalsIgnoreCase("flexOverride")){
+    				}else if( attr.key.equals("flexOverride")){
+    					attrs += " class=\"" + attr.value  + "\""
+    				}else{
     					attrs += " " + attr.key + "=\"" + attr.value  + "\""
     				}
-    			}
-    			 	   					
+    			}    			 	   					
     		}
+    	}    
+    	return checkHtmlAttrClass(attrs)
+    }
+    
+       
+    def static String checkHtmlAttrClass(String attr){    	
+    	var String[] attrs = attr.split(" ")
+    	var int count = 0
+    	var ArrayList<String> allClass = new ArrayList<String>()
+    	var ArrayList<String> newAttrs = new ArrayList<String>()
+    	var String sAttrs = "" 
+    	for(a : attrs){
+    		if(a.contains("class=")){
+    			count++
+    			allClass.add(a)
+    		}else{
+    			newAttrs.add(a)
+    		}	
     	}
-    	return attrs
+    	if(count > 0){    		
+    		var String sClass = "class=\""
+    		for(c: allClass){
+    			if(allClass.head.equals(c)){
+    				sClass+= c.replace("\"", "").split("=").get(1).trim
+    			}else{
+    				sClass+= " " + c.replace("\"", "").split("=").get(1).trim
+    			}
+    		}
+    		sClass+= "\""
+    		newAttrs.add(sClass)
+    	}else{
+    		newAttrs.addAll(allClass)
+    	}    		
+    	for(a : newAttrs){
+    		if(newAttrs.head.equals(a))
+    			sAttrs += a
+    		else
+    			sAttrs += " " + a    		
+    	}       			    	
+    	return sAttrs
     }
-    
-     def private static String getResourceFileNameFromAttrs(String value){
-    	var fname   = value.split("\'").get(1).trim
-    	var ns_name = value.split("\'").get(3).trim
-    	var ns      = ns_name.replace(".","_").split("_").get(0)
-    	var name    = ns_name.replace(".","_").split("_").get(1)  
-    	return fname + "_" + ns  + "_" + name
-    }
-    
-    
-    def private static String getResourceNameFromAttrs(String value){
-    	var ns_name = value.split("\'").get(3).trim
-    	var name    = ns_name.replace(".","_").split("_").get(1)           
-    	return name
-    }    
     
 	
 }

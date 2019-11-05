@@ -7,6 +7,7 @@ import com.softtek.mxml.mxml.Project
 import com.softtek.mxml.utils.Util
 import java.util.HashSet
 import java.util.Set
+import java.util.LinkedHashMap
 
 class JsonResourceGenerator {
 	
@@ -72,8 +73,8 @@ class JsonResourceGenerator {
     	if(!node.attrs.empty){
     		for(attr : node.attrs){
     			if(attr.value.contains("resourceManager.getString")){
-    			  jsonList.add(setJsonKeyValue(attr.value))
-    			  return setJsonKeyValue(attr.value)
+    			  setJsonKeyValue(attr.value)
+    			  return ""
     	        }   			
     		}
     	}
@@ -81,9 +82,12 @@ class JsonResourceGenerator {
     }
   
     
-    def String setJsonKeyValue(String value){
-    	 var fname= util.getResourceFileNameFromAttrs(value)
-    	 return  "\"" + fname +"\"" + ":{"+ "\"" +util.getResourceNameFromAttrs(value)+ "\"" + ":"+ "\""+util.getResourceNameFromAttrs(value)+"\"}"       
+    def void setJsonKeyValue(String value){
+		var LinkedHashMap<String, String> result = util.getFileNameAndResourceFromAttrs(value)		
+		for(entry : result.entrySet){
+			jsonList.add("\"" + entry.value+"_"+entry.key +"\"" + ":{"+ "\"" +entry.key.split("_").get(entry.key.split("_").size-1) +"\"" + ":"+ "\""+entry.key.split("_").get(entry.key.split("_").size-1)+"\"}")
+		}
+		   
     }
    
 }

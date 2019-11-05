@@ -5,6 +5,7 @@ import com.softtek.mxml.mxml.Node
 import java.util.LinkedHashMap
 import java.util.LinkedHashSet
 import java.util.ArrayList
+import java.util.List
 
 class Util {	
 	
@@ -101,10 +102,11 @@ class Util {
     	var String attrs = ""
     	if(!node.attrs.empty){
     		for(attr : node.attrs){    				
-    			if(attr.value.contains("resourceManager.getString")){
-    			  attrs += " " + "data-i18n" + "=\"" + getResourceFileNameFromAttrs(attr.value)+"."+getResourceNameFromAttrs(attr.value) + "\""    
-    			}
-    			else{
+    			if (attr.value.contains("?resourceManager")) {    
+    			  attrs += " class=\"ternaryOperation\" data-i18n" + "=\"" + this.getFileNameAndResourceFromAttrs(attr.value).entrySet.get(0).value+"."+this.getFileNameAndResourceFromAttrs(attr.value).entrySet.get(0).key + "\""
+    			}else if (attr.value.contains("resourceManager")) {
+    				attrs += " " + "data-i18n" + "=\"" + this.getFileNameAndResourceFromAttrs(attr.value).entrySet.get(0).value+"."+this.getFileNameAndResourceFromAttrs(attr.value).entrySet.get(0).key + "\""    			    			
+    			}else{
     				if(attrToSkip !== null && !attrToSkip.empty){
     					if(!attrToSkip.contains(attr.key)){
     						attrs += " " + attr.key + "=\"" + attr.value  + "\""
@@ -112,11 +114,50 @@ class Util {
     				}else{
     					attrs += " " + attr.key + "=\"" + attr.value  + "\""
     				}
-    			}
-    			 	   					
+    			}    			 	   					
     		}
+    	}    
+    	return checkHtmlAttrClass(attrs)
+    }
+    
+    
+    def String checkHtmlAttrClass(String attr){    	
+    	var String[] attrs = attr.split(" ")
+    	var int count = 0
+    	var ArrayList<String> allClass = new ArrayList<String>()
+    	var ArrayList<String> newAttrs = new ArrayList<String>()
+    	var String sAttrs = "" 
+    	for(a : attrs){
+    		if(a.contains("class=")){
+    			count++
+    			allClass.add(a)
+    		}else{
+    			newAttrs.add(a)
+    		}	
     	}
-    	return attrs
+    	if(count > 0){    		
+    		var String sClass = "class=\""
+    		for(c: allClass){
+    			if(allClass.head.equals(c)){
+    				sClass+= c.replace("\"", "").split("=").get(1).trim
+    			}else{
+    				sClass+= " " + c.replace("\"", "").split("=").get(1).trim
+    			}
+    		}
+    		sClass+= "\""
+    		newAttrs.add(sClass)
+    	}else{
+    		newAttrs.addAll(allClass)
+    	}    		
+    	for(a : newAttrs){
+    		if(newAttrs.head.equals(a))
+    			sAttrs += a
+    		else
+    			sAttrs += " " + a
+    		
+    	}    
+    			    	
+    	return sAttrs
     }
     
     def String removeNameDecorator(String fname){
@@ -125,19 +166,18 @@ class Util {
     }
         
     // Resources
-    def String getResourceFileNameFromAttrs(String value){
-    	var fname   = value.split("\'").get(1).trim
-    	var ns_name = value.split("\'").get(3).trim
-    	var ns      = ns_name.replace(".","_").split("_").get(0)
-    	var name    = ns_name.replace(".","_").split("_").get(1)  
-    	return fname + "_" + ns  + "_" + name
-    }
-    
-    
-    def String getResourceNameFromAttrs(String value){
-    	var ns_name = value.split("\'").get(3).trim
-    	var name    = ns_name.replace(".","_").split("_").get(1)           
-    	return name
-    }
+
+	def LinkedHashMap<String, String> getFileNameAndResourceFromAttrs(String value){
+		var LinkedHashMap<String, String> result = new LinkedHashMap<String, String>()
+		if (value.contains("?resourceManager")) {
+			var String [] test = ((value.split("\\?").get(1)).replace("resourceManager.getString(", "").replace("'", "").replace(")", "").replace("}", "").split(":"))
+			result.put(test.get(0).replace("\\.", "_").split(",").get(1), test.get(0).replace("\\.", "_").split(",").get(0))
+			result.put(test.get(1).replace("\\.", "_").split(",").get(1), test.get(1).replace("\\.", "_").split(",").get(0))
+		}else if(value.contains("resourceManager.getString")){
+			var String [] test = value.replace("{resourceManager.getString(", "").replace(")", "").replace("}", "").replace("'", "").replace(".", "_").replace(":", "").split(",")
+			result.put(test.get(1), test.get(0))
+		}
+		return result
+	}
     
 }

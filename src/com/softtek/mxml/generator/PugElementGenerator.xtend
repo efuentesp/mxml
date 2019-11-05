@@ -97,6 +97,10 @@ class PugElementGenerator {
 				«this.genDateField(indentation, n, null)»
 			«ELSEIF n.name.equals('DateChooser')»	
 				«this.genDateChooser(indentation, n, null)»
+			«ELSEIF n.name.equals("FormItem")»
+				«this.genFormItem(indentation, n, null)»
+			«ELSEIF n.name.equals("AdvancedDataGridColumn")»
+				«this.genAdvancedDataGridColumn(indentation, n, null)»
 		    «ELSE» 				
 				«util.getIndentation(indentation)».«util.getNodeClass(n)»
 			«ENDIF»
@@ -179,6 +183,10 @@ class PugElementGenerator {
 			«this.genDateField(indentation, null, n)»
 		«ELSEIF n.name.equals('DateChooser')»	
 			«this.genDateChooser(indentation, null, n)»
+		«ELSEIF n.name.equals("FormItem")»
+			«this.genFormItem(indentation, null, n)»
+		«ELSEIF n.name.equals("AdvancedDataGridColumn")»
+			«this.genAdvancedDataGridColumn(indentation, null, n)»
 	    «ELSE» 				
 			«util.getIndentation(indentation)».«n.name»
 		«ENDIF»
@@ -203,8 +211,8 @@ class PugElementGenerator {
 	def String genLabel(int indentation, Node n, NodeOverride no)'''
 		«IF n !== null»		
 			«util.getIndentation(indentation)»label(«util.getConcatAttrs(n, null)»)
-		«ELSEIF no !== null»
-			«util.getIndentation(indentation)»label(«NodeOverride.getConcatAttrs(no, null)»«getOverride(no, "ClassDeclaration")»)
+		«ELSEIF no !== null»			
+			«util.getIndentation(indentation)»label(«NodeOverride.getConcatAttrs(no, null)»)
 		«ENDIF»
 	'''
 	
@@ -212,7 +220,7 @@ class PugElementGenerator {
 		«IF n !== null»		
 			«util.getIndentation(indentation)»text(«util.getConcatAttrs(n, null)»)
 		«ELSEIF no !== null»
-			«util.getIndentation(indentation)»text(«NodeOverride.getConcatAttrs(no, null)»«getOverride(no, "ClassDeclaration")»)
+			«util.getIndentation(indentation)»text(«NodeOverride.getConcatAttrs(no, null)»)
 		«ENDIF»
 	'''
 		
@@ -220,7 +228,7 @@ class PugElementGenerator {
 		«IF n !== null»		
 			«util.getIndentation(indentation)»input(type="text" «util.getConcatAttrs(n, null)»)
 		«ELSEIF no !== null»
-			«util.getIndentation(indentation)»input(type="text" «NodeOverride.getConcatAttrs(no, null)»«getOverride(no, "ClassDeclaration")»)
+			«util.getIndentation(indentation)»input(type="text" «NodeOverride.getConcatAttrs(no, null)»)
 		«ENDIF»
 	'''
 	
@@ -228,7 +236,7 @@ class PugElementGenerator {
 		«IF n !== null»		
 			«util.getIndentation(indentation)»textarea( «util.getConcatAttrs(n, null)»)
 		«ELSEIF no !== null»
-			«util.getIndentation(indentation)»textarea( «NodeOverride.getConcatAttrs(no, null)»«getOverride(no, "ClassDeclaration")»)
+			«util.getIndentation(indentation)»textarea( «NodeOverride.getConcatAttrs(no, null)»)
 		«ENDIF»
 	'''
 	
@@ -238,7 +246,7 @@ class PugElementGenerator {
 		«IF n !== null»		
 			«util.getIndentation(indentation)»button(«util.getConcatAttrs(n, null)»)
 		«ELSEIF no !== null»
-			«util.getIndentation(indentation)»button( «NodeOverride.getConcatAttrs(no, null)»«getOverride(no, "ClassDeclaration")»)
+			«util.getIndentation(indentation)»button( «NodeOverride.getConcatAttrs(no, null)»)
 		«ENDIF»
 	'''
 	
@@ -255,7 +263,7 @@ class PugElementGenerator {
 			«util.getIndentation(indentation)»input(type="radio" «util.getConcatAttrs(n, null)» )
 			| «IF !this.getLabel(n, null).equalsIgnoreCase("")» «this.getLabel(n, null)»«ENDIF»
 		«ELSEIF no !== null»
-			«util.getIndentation(indentation)»input(type="radio" «NodeOverride.getConcatAttrs(no, null)»getOverride(no, "ClassDeclaration")» )
+			«util.getIndentation(indentation)»input(type="radio" «NodeOverride.getConcatAttrs(no, null)»)
 			| «IF !this.getLabel(n, null).equalsIgnoreCase("")» «this.getLabel(n, null)»«ENDIF»
 		«ENDIF»
 		
@@ -266,7 +274,7 @@ class PugElementGenerator {
 			«util.getIndentation(indentation)»input(type="checkbox" «util.getConcatAttrs(n, null)» ) 
 			| «IF !this.getLabel(n, null).equalsIgnoreCase("")» «this.getLabel(n, null)»«ENDIF»
 		«ELSEIF no !== null»
-			«util.getIndentation(indentation)»input(type="checkbox" «NodeOverride.getConcatAttrs(no, null)»«getOverride(no, "ClassDeclaration")» ) 
+			«util.getIndentation(indentation)»input(type="checkbox" «NodeOverride.getConcatAttrs(no, null)») 
 			| «IF !this.getLabel(n, null).equalsIgnoreCase("")» «this.getLabel(n, null)»«ENDIF»
 		«ENDIF»		
     '''
@@ -277,7 +285,7 @@ class PugElementGenerator {
 		«IF n !== null»		
 			«util.getIndentation(indentation)»input(type="range" class="hSlider" «util.getConcatAttrs(n, null)»)
 		«ELSEIF no !== null»
-			«util.getIndentation(indentation)»input(type="range" class="hSlider«getOverride(no, "OnlyClass")»" «NodeOverride.getConcatAttrs(no, null)»)
+			«util.getIndentation(indentation)»input(type="range" class="hSlider«getOverride(no, "OnlyClass")»")
 		«ENDIF»				
 	'''
 	
@@ -285,7 +293,7 @@ class PugElementGenerator {
 		«IF n !== null»		
 			«util.getIndentation(indentation)»input(type="range" class="vSlider" «util.getConcatAttrs(n, null)»)
 		«ELSEIF no !== null»
-			«util.getIndentation(indentation)»input(type="range" class="vSlider«getOverride(no, "OnlyClass")»" «NodeOverride.getConcatAttrs(no, null)»)
+			«util.getIndentation(indentation)»input(type="range" class="vSlider«getOverride(no, "OnlyClass")»")
 		«ENDIF»		
 	'''
 	
@@ -293,7 +301,7 @@ class PugElementGenerator {
 		«IF n !== null»		
 			«util.getIndentation(indentation)»input(type="number" «util.getConcatAttrs(n, null)»)
 		«ELSEIF no !== null»
-			«util.getIndentation(indentation)»input(type="number" «NodeOverride.getConcatAttrs(no, null)»«getOverride(no, "ClassDeclaration")»)
+			«util.getIndentation(indentation)»input(type="number" «NodeOverride.getConcatAttrs(no, null)»)
 		«ENDIF»			
 	'''
 	
@@ -301,7 +309,7 @@ class PugElementGenerator {
 		«IF n !== null»		
 			«util.getIndentation(indentation)»input(type="color" «util.getConcatAttrs(n, null)»)
 		«ELSEIF no !== null»
-			«util.getIndentation(indentation)»input(type="color" «NodeOverride.getConcatAttrs(no, null)»«getOverride(no, "ClassDeclaration")»)
+			«util.getIndentation(indentation)»input(type="color" «NodeOverride.getConcatAttrs(no, null)»)
 		«ENDIF»		
 	'''
 	
@@ -309,7 +317,7 @@ class PugElementGenerator {
 		«IF n !== null»		
 			«util.getIndentation(indentation)»input(type="date" «util.getConcatAttrs(n, null)»)
 		«ELSEIF no !== null»
-			«util.getIndentation(indentation)»input(type="date" «NodeOverride.getConcatAttrs(no, null)»«getOverride(no, "ClassDeclaration")»)
+			«util.getIndentation(indentation)»input(type="date" «NodeOverride.getConcatAttrs(no, null)»)
 		«ENDIF»			
 	'''
 	
@@ -317,7 +325,7 @@ class PugElementGenerator {
 		«IF n !== null»		
 			«util.getIndentation(indentation)»input(type="date" «util.getConcatAttrs(n, null)»)
 		«ELSEIF no !== null»
-			«util.getIndentation(indentation)»input(type="date" «NodeOverride.getConcatAttrs(no, null)»«getOverride(no, "ClassDeclaration")»)
+			«util.getIndentation(indentation)»input(type="date" «NodeOverride.getConcatAttrs(no, null)»)
 		«ENDIF»		
 	'''
 	
@@ -331,7 +339,7 @@ class PugElementGenerator {
 			«util.getIndentation(indentation+1)»option(value="B") B
 			«util.getIndentation(indentation+1)»option(value="C") C
 		«ELSEIF no !== null»
-			«util.getIndentation(indentation)»select(size="3" «NodeOverride.getConcatAttrs(no, null)»«getOverride(no, "ClassDeclaration")»)
+			«util.getIndentation(indentation)»select(size="3" «NodeOverride.getConcatAttrs(no, null)»)
 			«util.getIndentation(indentation+1)»option(value="A") A
 			«util.getIndentation(indentation+1)»option(value="B") B
 			«util.getIndentation(indentation+1)»option(value="C") C
@@ -345,7 +353,7 @@ class PugElementGenerator {
 			«util.getIndentation(indentation+1)»option(value="B") B
 			«util.getIndentation(indentation+1)»option(value="C") C
 		«ELSEIF no !== null»
-			«util.getIndentation(indentation)»select(«NodeOverride.getConcatAttrs(no, null)»«getOverride(no, "ClassDeclaration")»)
+			«util.getIndentation(indentation)»select(«NodeOverride.getConcatAttrs(no, null)»)
 			«util.getIndentation(indentation+1)»option(value="A") A
 			«util.getIndentation(indentation+1)»option(value="B") B
 			«util.getIndentation(indentation+1)»option(value="C") C
@@ -362,7 +370,7 @@ class PugElementGenerator {
 		«util.getIndentation(indentation+2)»tr(class="gridRow")
 		«util.getIndentation(indentation+3)»td(class="gridItem"): span Los Angeles
 		«ELSEIF no !== null»
-		«util.getIndentation(indentation)»table(class="dataGrid«getOverride(no, "OnlyClass")»" «NodeOverride.getConcatAttrs(no, null)»)
+		«util.getIndentation(indentation)»table(class="dataGrid" «NodeOverride.getConcatAttrs(no, null)»)
 		«util.getIndentation(indentation+1)»thead
 		«util.getIndentation(indentation+2)»tr(class="gridRow")
 		«util.getIndentation(indentation+3)»th(class="dataGridHeader"): span City
@@ -371,6 +379,14 @@ class PugElementGenerator {
 		«util.getIndentation(indentation+3)»td(class="gridItem"): span Los Angeles
 		«ENDIF»			
 	'''
+	 
+	def genAdvancedDataGridColumn(int indentation, Node n, NodeOverride no)'''
+		«IF n !== null»
+			«util.getIndentation(indentation)»div(class="AdvancedDataGridColumn"«util.getConcatAttrs(n, null)»)
+		«ELSEIF no !== null»
+			«util.getIndentation(indentation)»div(class="AdvancedDataGridColumn"«NodeOverride.getConcatAttrs(no, null)»)
+		«ENDIF»
+	''' 
 	 
 	def String genTileList(int indentation, Node n, NodeOverride no)'''
 		«IF n !== null»		
@@ -393,7 +409,7 @@ class PugElementGenerator {
 			«util.getIndentation(indentation+1)»option(value="B") B
 			«util.getIndentation(indentation+1)»option(value="C") C
 		«ELSEIF no !== null»
-			«util.getIndentation(indentation)»select(class="hList«getOverride(no, "OnlyClass")»" size="3" «NodeOverride.getConcatAttrs(no, null)»)
+			«util.getIndentation(indentation)»select(class="hList" size="3" «NodeOverride.getConcatAttrs(no, null)»)
 			«util.getIndentation(indentation+1)»option(value="A") A
 			«util.getIndentation(indentation+1)»option(value="B") B
 			«util.getIndentation(indentation+1)»option(value="C") C
@@ -406,7 +422,7 @@ class PugElementGenerator {
 			«util.getIndentation(indentation+1)»li: span(class="caret") Beverages
 			«util.getIndentation(indentation+2)»ul(class="nested")
 		«ELSEIF no !== null»
-			«util.getIndentation(indentation)»ul(class="treeView«getOverride(no, "OnlyClass")»" «NodeOverride.getConcatAttrs(no, null)»)
+			«util.getIndentation(indentation)»ul(class="treeView" «NodeOverride.getConcatAttrs(no, null)»)
 			«util.getIndentation(indentation+1)»li: span(class="caret") Beverages
 			«util.getIndentation(indentation+2)»ul(class="nested")
 		«ENDIF»			
@@ -425,7 +441,7 @@ class PugElementGenerator {
 			«util.getIndentation(indentation+2)»tr(class="gridRow")
 			«util.getIndentation(indentation+3)»td(class="gridItem"): span Los Angeles
 		«ELSEIF no !== null»
-			«util.getIndentation(indentation)»table(class="dataGrid«getOverride(no, "OnlyClass")»" «NodeOverride.getConcatAttrs(no, null)»)
+			«util.getIndentation(indentation)»table(class="dataGrid" «NodeOverride.getConcatAttrs(no, null)»)
 			«util.getIndentation(indentation+1)»thead
 			«util.getIndentation(indentation+2)»tr(class="gridRow")
 			«util.getIndentation(indentation+3)»th(class="dataGridHeader"): span City
@@ -434,6 +450,8 @@ class PugElementGenerator {
 			«util.getIndentation(indentation+3)»td(class="gridItem"): span Los Angeles
 		«ENDIF»	
 	'''
+	
+
 	
 	// Media and Progress
 	
@@ -640,16 +658,14 @@ class PugElementGenerator {
 			«util.getIndentation(indentation+2)»div(class="formContent")
 		«ENDIF»		
 	'''
-	  
-	// Include
-	 
-//	def String genView(int indentation, Node n, NodeOverride no, LinkedHashMap<String, String> nsl)'''		
-//		«IF n !== null»		
-//			«util.getIndentation(indentation)»include «IF nsl.get("views") !== null»«nsl.get("views").replace("*", n.name)»«ELSEIF nsl.get("view") !== null»«nsl.get("view").replace("*", n.name)»«ENDIF».pug
-//		«ELSEIF no !== null»
-//			«util.getIndentation(indentation)»include «IF nsl.get("views") !== null»«nsl.get("views").replace("*", no.name)»«ELSEIF nsl.get("view") !== null»«nsl.get("view").replace("*", no.name)»«ENDIF».pug
-//		«ENDIF»			
-//	'''
+	
+	def String genFormItem(int indentation, Node n, NodeOverride no)'''
+		«IF n !== null»
+			«util.getIndentation(indentation)»div(class="formItem"«util.getConcatAttrs(n, null)»)
+		«ELSEIF no !== null»
+			«util.getIndentation(indentation)»div(class="formItem"«NodeOverride.getConcatAttrs(no, null)»)
+		«ENDIF»
+	'''
 	
 	// Other
 	
@@ -680,9 +696,9 @@ class PugElementGenerator {
 
 	def String genIncludeComponent(int indentation, Node n, NodeOverride no, LinkedHashMap<String, String> nsl)'''
 		«IF n !== null»
-			«util.getIndentation(indentation)»include «IF nsl.get(n.prefix) !== null»«nsl.get(n.prefix).replace("*", n.name)»«ENDIF».pug
+			«util.getIndentation(indentation)»include /«IF nsl.get(n.prefix) !== null»«nsl.get(n.prefix).replace("*", n.name)»«ENDIF».pug
 		«ELSEIF no !== null»
-			«util.getIndentation(indentation)»include «IF nsl.get(no.prefix) !== null»«nsl.get(no.prefix).replace("*", no.name)»«ENDIF».pug
+			«util.getIndentation(indentation)»include /«IF nsl.get(no.prefix) !== null»«nsl.get(no.prefix).replace("*", no.name)»«ENDIF».pug
 		«ENDIF»	
 	'''
 	

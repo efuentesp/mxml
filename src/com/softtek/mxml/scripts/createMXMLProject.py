@@ -33,11 +33,11 @@ for dirName, subdirList, fileList in os.walk(rootDir):
         if fname.endswith(".mxml") and not fname.startswith("projectMXML.mxml") and not alreadyProcessed :
             print('\t%s' % fname)
             counter=counter + 1
-            f = open(dirName+"\\"+fname, "r")
+            f = open(dirName+"\\"+fname, "r", encoding="utf8")
             contents = f.readlines()
             f.close()
             contents.insert(1, "<filename:" +  str(counter) + "@_" + fname.split(".")[0] + ">\r")
-            f = open(dirName+"\\"+fname, "w")
+            f = open(dirName+"\\"+fname, "w", encoding="utf8")
             contents = "".join(contents)
             f.write(contents+"\r")
             f.write("</filename:" + str(counter) + "@_" + fname.split(".")[0] + ">\r")
