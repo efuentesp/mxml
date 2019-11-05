@@ -218,9 +218,9 @@ class PugElementGenerator {
 	
 	def String genText(int indentation, Node n, NodeOverride no)'''		
 		«IF n !== null»		
-			«util.getIndentation(indentation)»text(«util.getConcatAttrs(n, null)»)
+			«util.getIndentation(indentation)»label(«util.getConcatAttrs(n, null)»)
 		«ELSEIF no !== null»
-			«util.getIndentation(indentation)»text(«NodeOverride.getConcatAttrs(no, null)»)
+			«util.getIndentation(indentation)»label(«NodeOverride.getConcatAttrs(no, null)»)
 		«ENDIF»
 	'''
 		
@@ -261,10 +261,10 @@ class PugElementGenerator {
 	def String genRadioButton(int indentation, Node n, NodeOverride no)'''		
 		«IF n !== null»		
 			«util.getIndentation(indentation)»input(type="radio" «util.getConcatAttrs(n, null)» )
-			| «IF !this.getLabel(n, null).equalsIgnoreCase("")» «this.getLabel(n, null)»«ENDIF»
+			«util.getIndentation(indentation)»| «IF !this.getLabel(n, null).equalsIgnoreCase("")» «this.getLabel(n, null)»«ENDIF»
 		«ELSEIF no !== null»
 			«util.getIndentation(indentation)»input(type="radio" «NodeOverride.getConcatAttrs(no, null)»)
-			| «IF !this.getLabel(n, null).equalsIgnoreCase("")» «this.getLabel(n, null)»«ENDIF»
+			«util.getIndentation(indentation)»| «IF !this.getLabel(n, null).equalsIgnoreCase("")» «this.getLabel(n, null)»«ENDIF»
 		«ENDIF»
 		
 	'''
@@ -272,10 +272,10 @@ class PugElementGenerator {
 	def String genCheckBoxButton(int indentation, Node n, NodeOverride no)'''
 		«IF n !== null»		
 			«util.getIndentation(indentation)»input(type="checkbox" «util.getConcatAttrs(n, null)» ) 
-			| «IF !this.getLabel(n, null).equalsIgnoreCase("")» «this.getLabel(n, null)»«ENDIF»
+			«util.getIndentation(indentation)»| «IF !this.getLabel(n, null).equalsIgnoreCase("")» «this.getLabel(n, null)»«ENDIF»
 		«ELSEIF no !== null»
 			«util.getIndentation(indentation)»input(type="checkbox" «NodeOverride.getConcatAttrs(no, null)») 
-			| «IF !this.getLabel(n, null).equalsIgnoreCase("")» «this.getLabel(n, null)»«ENDIF»
+			«util.getIndentation(indentation)»| «IF !this.getLabel(n, null).equalsIgnoreCase("")» «this.getLabel(n, null)»«ENDIF»
 		«ENDIF»		
     '''
 	

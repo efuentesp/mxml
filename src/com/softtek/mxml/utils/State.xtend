@@ -148,7 +148,7 @@ class State {
 			if (node.prefix.equalsIgnoreCase("mx") && node.name.equalsIgnoreCase('states') ){
 				var states = node as ComplexNodeOverride
 				for(s: states.nodes){					
-					var State state = new State(fname, NodeOverride.getAttr(s, "name"), new LinkedHashSet<FlexOverride>(), NodeOverride.getAttr(s, "basedOn"))	
+					var State state = new State(fname, NodeOverride.getAttr(s, "name").replace("{", "").replace("}", "").trim, new LinkedHashSet<FlexOverride>(), NodeOverride.getAttr(s, "basedOn"))	
 					for(o : (s as ComplexNodeOverride).nodes){
 						addOverrides(state, o);
 					}
