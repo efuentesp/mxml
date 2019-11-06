@@ -2,7 +2,6 @@ package com.softtek.mxml.utils
 
 import java.util.ArrayList
 import com.softtek.mxml.mxml.Node
-import java.util.LinkedHashMap
 
 class NodeOverride {
 	
@@ -59,8 +58,12 @@ class NodeOverride {
 	
 	def static String getConcatAttrs(NodeOverride node, ArrayList<String> attrToSkip){
     	var String attrs = ""
+    	var ArrayList<String> charstoremove = new ArrayList<String>();
+    	charstoremove.add("{")
+    	charstoremove.add("}")
     	if(!node.attrs.empty){
-    		for(attr : node.attrs){    				
+    		for(attr : node.attrs){   
+    			var String value= attr.value			
     			if (attr.value.contains("?resourceManager")) {    
     			  attrs += " class=\"ternaryOperation\" data-i18n" + "=\"" + new Util().getFileNameAndResourceFromAttrs(attr.value).entrySet.get(0).value+"."+new Util().getFileNameAndResourceFromAttrs(attr.value).entrySet.get(0).key + "\""
     			}else if (attr.value.contains("resourceManager")) {
@@ -68,12 +71,12 @@ class NodeOverride {
     			}else{
     				if(attrToSkip !== null && !attrToSkip.empty){
     					if(!attrToSkip.contains(attr.key)){
-    						attrs += " " + attr.key + "=\"" + attr.value  + "\""
+    						attrs += " " + attr.key + "=\"" + new Util().replaceStrings(charstoremove ,value)  + "\""
     					}
     				}else if( attr.key.equals("flexOverride")){
-    					attrs += " class=\"" + attr.value  + "\""
+    					attrs += " class=\"" + new Util().replaceStrings(charstoremove ,value)  + "\""
     				}else{
-    					attrs += " " + attr.key + "=\"" + attr.value  + "\""
+    					attrs += " " + attr.key + "=\"" + new Util().replaceStrings(charstoremove ,value) + "\""
     				}
     			}    			 	   					
     		}

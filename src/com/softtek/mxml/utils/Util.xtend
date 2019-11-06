@@ -100,8 +100,12 @@ class Util {
     
 	def String getConcatAttrs(Node node, ArrayList<String> attrToSkip){
     	var String attrs = ""
+    	var ArrayList<String> charstoremove = new ArrayList<String>();
+    	charstoremove.add("{")
+    	charstoremove.add("}")
     	if(!node.attrs.empty){
-    		for(attr : node.attrs){    				
+    		for(attr : node.attrs){    	
+    			var String value= attr.value			
     			if (attr.value.contains("?resourceManager")) {    
     			  attrs += " class=\"ternaryOperation\" data-i18n" + "=\"" + this.getFileNameAndResourceFromAttrs(attr.value).entrySet.get(0).value+"."+this.getFileNameAndResourceFromAttrs(attr.value).entrySet.get(0).key + "\""
     			}else if (attr.value.contains("resourceManager")) {
@@ -109,10 +113,10 @@ class Util {
     			}else{
     				if(attrToSkip !== null && !attrToSkip.empty){
     					if(!attrToSkip.contains(attr.key)){
-    						attrs += " " + attr.key + "=\"" + attr.value  + "\""
+    						attrs += " " + attr.key + "=\"" + replaceStrings(charstoremove ,value) + "\""
     					}
     				}else{
-    					attrs += " " + attr.key + "=\"" + attr.value  + "\""
+    					attrs += " " + attr.key + "=\"" + replaceStrings(charstoremove ,value)   + "\""
     				}
     			}    			 	   					
     		}
@@ -120,7 +124,20 @@ class Util {
     	return checkHtmlAttrClass(attrs)
     }
     
-    
+    def String replaceStrings(ArrayList<String> strs, String value){   
+     	var String value1 = new String(value);
+     	var String value2
+     	var Boolean contains=false
+     	for (str:strs){
+     		if (value.contains(str)) {
+     		   contains=true
+     		   value2 =value1.replace(str,"")
+     		  }
+     		 value1=value2
+     	}
+     	if (contains) return value1 else return value
+    }
+     
     def String checkHtmlAttrClass(String attr){    	
     	var String[] attrs = attr.split(" ")
     	var int count = 0

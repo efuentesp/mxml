@@ -1,6 +1,5 @@
 package com.softtek.mxml.generator
 
-import com.softtek.mxml.mxml.ComplexNode
 import com.softtek.mxml.mxml.Node
 import com.softtek.mxml.utils.ComplexNodeOverride
 import com.softtek.mxml.utils.FlexOverride
@@ -24,7 +23,7 @@ class PugStateGenerator {
 		this.fname = fname
 		this.nsl = nsl
 		this.states = states		
-		fsa.generateFile("pug/"+path+"/" + fname + ".pug", this.genBaseState(node, states))				
+		fsa.generateFile("pug/"+path+"/" + fname + ".pug", this.genBaseState(State.getOverrideApp(node), states))				
 		for(state : states){			
 			fsa.generateFile("pug/"+path+"/" + fname + "_" + state.name.toFirstLower +".pug", this.genState(State.getOverrideApp(node), State.basedOnState(state, states)))
 		}			
@@ -33,7 +32,7 @@ class PugStateGenerator {
 
 	/* GEN BASE STATE */
 	
-	def CharSequence genBaseState(Node node, LinkedHashSet<State> states)'''
+	def CharSequence genBaseState(NodeOverride node, LinkedHashSet<State> states)'''
 	div(id="«fname»_states" class="states")
 	«util.getIndentation(1)»button(id="btn_«fname»_baseState") «fname» [baseState]
 	«FOR state : states»
@@ -46,11 +45,11 @@ class PugStateGenerator {
 	«ENDFOR»
 	'''
 	
-    def CharSequence genNodes(int indentation, Node n)'''
-		«IF (n instanceof ComplexNode)»				
+    def CharSequence genNodes(int indentation, NodeOverride n)'''
+		«IF (n instanceof ComplexNodeOverride)»				
 		  «IF !n.name.equalsIgnoreCase('states')»	
-		  «pugElementGenerator.getNodeType(indentation, n, null, this.nsl, this.fname)»
-		  «var innernode = n as ComplexNode»
+		  «pugElementGenerator.getNodeType(indentation, n , this.nsl, this.fname)»
+		  «var innernode = n as ComplexNodeOverride»
 		  «FOR i: innernode.nodes»
 		  	«IF  n.name.equalsIgnoreCase('Application')»
 		  		«genNodes(indentation+3, i)»
@@ -62,7 +61,7 @@ class PugStateGenerator {
 		  «ENDFOR»	
 		  «ENDIF»		
 		«ELSE»
-		   «pugElementGenerator.getNodeType(indentation, n, null, this.nsl, this.fname)»
+		   «pugElementGenerator.getNodeType(indentation, n, this.nsl, this.fname)»
 		«ENDIF»
 	'''	
 	
@@ -83,7 +82,7 @@ class PugStateGenerator {
 					«genNodesState(indentation, r, FlexOverride.removeFlexOverride(o, overrides))»
 				«ENDFOR»
 		  	«ELSE»
-		  	  «pugElementGenerator.getNodeType(indentation, null, n, this.nsl, this.fname)»
+		  	  «pugElementGenerator.getNodeType(indentation, n, this.nsl, this.fname)»
 		  	  «var innernode = n as ComplexNodeOverride»
   			  «FOR i: innernode.nodes»
   			  	«IF  n.name.equalsIgnoreCase('Application')»
@@ -100,7 +99,7 @@ class PugStateGenerator {
 			«IF o !== null»	
 				«overrideSimpleNode(indentation, n, o, overrides)»
 			«ELSE»
-			«pugElementGenerator.getNodeType(indentation, null, n, this.nsl, this.fname)»
+			«pugElementGenerator.getNodeType(indentation, n, this.nsl, this.fname)»
 			«ENDIF»
 		«ENDIF»
 	'''	
@@ -130,11 +129,11 @@ class PugStateGenerator {
 	def private CharSequence overrideSimpleNode(int indentation, NodeOverride n, FlexOverride o, LinkedHashSet<FlexOverride> overrides)'''
 		«IF o.type.equalsIgnoreCase("AddChild")»					
 			«FOR node : this.applySimpleNodeAddChildOverride(n, o)»
-				«pugElementGenerator.getNodeType(indentation, null, node, this.nsl, this.fname)»
+				«pugElementGenerator.getNodeType(indentation, node, this.nsl, this.fname)»
 			«ENDFOR»
 		«ELSE»
 			«var node = applyNodeOverride(n, this.overrideNode(NodeOverride.getAttr(n, "id"), overrides))»
-			«pugElementGenerator.getNodeType(indentation, null, node, this.nsl, this.fname)»
+			«pugElementGenerator.getNodeType(indentation, node, this.nsl, this.fname)»
 		«ENDIF»
 	'''
 			

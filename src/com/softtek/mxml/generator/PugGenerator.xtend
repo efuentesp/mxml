@@ -1,6 +1,5 @@
 package com.softtek.mxml.generator
 
-import com.softtek.mxml.mxml.ComplexNode
 import com.softtek.mxml.mxml.Node
 import com.softtek.mxml.mxml.Project
 import com.softtek.mxml.utils.State
@@ -9,8 +8,8 @@ import java.util.LinkedHashMap
 import java.util.LinkedHashSet
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IFileSystemAccess2
-import com.softtek.mxml.utils.NodeOverride
 import com.softtek.mxml.utils.ComplexNodeOverride
+import com.softtek.mxml.utils.NodeOverride
 
 class PugGenerator {
 	
@@ -31,25 +30,27 @@ class PugGenerator {
 	}
 	
 	def void generateCodeByNode(Node node, String fname, String path,IFileSystemAccess2 fsa) {	
-		var NodeOverride nodeOverride= State.getOverrideApp(node)
+		//Create a mutable copy from immutable node 
+		var NodeOverride overrideNode= State.getOverrideApp(node)
 		this.fname = fname
 		nsl =  new LinkedHashMap<String, String>()
       	nsl.putAll(util.getNameSpaceLocation(nsl, node))   
+      	
       	if(!this.appStates.empty){
 			if(this.appStates.containsKey(fname)){
 				pugStateGenerator.genStates(node, util.removeNameDecorator(fname), path, fsa, this.appStates.get(fname), this.nsl)
 			}else{
-				fsa.generateFile("pug/"+path+"/"+util.removeNameDecorator(fname)+".pug", genNodes(-2, nodeOverride) )
+				fsa.generateFile("pug/"+path+"/"+util.removeNameDecorator(fname)+".pug", genNodes(-2, overrideNode) )
 			}
 		}else{
-			fsa.generateFile("pug/"+path+"/"+util.removeNameDecorator(fname)+".pug", genNodes(-2, nodeOverride))
+			fsa.generateFile("pug/"+path+"/"+util.removeNameDecorator(fname)+".pug", genNodes(-2, overrideNode))
 		}	        	
 	}
 
     
     def CharSequence genNodes(int indentation, NodeOverride n)'''
 		«IF (n instanceof ComplexNodeOverride)»		  		  
-		  «pugElementGenerator.getNodeType(indentation, null, n, this.nsl, this.fname)»
+		  «pugElementGenerator.getNodeType(indentation, n, this.nsl, this.fname)»
 		  «var innernode = n as ComplexNodeOverride»
 		  «FOR i: innernode.nodes»
 		  	«IF  n.name.equalsIgnoreCase('Application')»
@@ -59,7 +60,7 @@ class PugGenerator {
 		  	«ENDIF»		  
 		  «ENDFOR»
 		«ELSE»
-		   «pugElementGenerator.getNodeType(indentation, null, n, this.nsl, this.fname)»
+		   «pugElementGenerator.getNodeType(indentation, n, this.nsl, this.fname)»
 		«ENDIF»
 	'''
 	
