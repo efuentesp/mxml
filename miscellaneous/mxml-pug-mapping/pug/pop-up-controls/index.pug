@@ -1,0 +1,24 @@
+doctype html
+html(lang="en")
+   head
+      title List-Based Controls       
+      link(rel="stylesheet" href="../assets/css/common.css")
+   body            
+      div(id="popup" style="display: none;")
+         div(class="content-popup")
+            div(class="close"): a(href="#" id="close") X
+            div
+               h2 mx:TitleWindow
+               p Lorem Ipsum...
+               div(style="float:left; width:100%;")
+      div(class="popup-overlay")
+
+      h2 mx:PopUpButton         
+      button(type="button" id="open") Nombre PopUpButton
+
+      h2 PopUpMenuButton
+      p Pendiente 
+      
+      script(src="../assets/scripts/jquery.min.js")      
+      script(src="./scripts.js")  
+      

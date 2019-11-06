@@ -1,0 +1,86 @@
+
+<html lang="en">
+  <head>
+    <title>Text Components </title>
+    <link rel="stylesheet" href="../assets/css/common.css"/>
+  </head>
+  <body>
+    <div class="states" id="AMCmpLoadingAd_states"> 
+      <button id="btn_AMCmpLoadingAd_baseState">AMCmpLoadingAd [baseState]</button>
+      <button id="btn_AMCmpLoadingAd_agrega_5">AMCmpLoadingAd [agrega_5]</button>
+      <button id="btn_AMCmpLoadingAd_agrega_5_6_y_7">AMCmpLoadingAd [agrega_5_6_y_7]</button>
+      <button id="btn_AMCmpLoadingAd_remueve_input_1">AMCmpLoadingAd [remueve_input_1]</button>
+      <button id="btn_AMCmpLoadingAd_remueve_2_y_4">AMCmpLoadingAd [remueve_2_y_4]</button>
+      <div id="AMCmpLoadingAd_baseState">
+        <div class="vBox" id="AMCmpLoadingAd_main">
+          <label>Test label 1: </label>
+          <input type="text" id="test_input_1"/>
+          <label>Test label 2: </label>
+          <input type="text" id="test_input_2"/>
+          <label>Test label 3: </label>
+          <input type="text" id="test_input_3"/>
+          <label>Test label 4: </label>
+          <input type="text" id="test_input_4"/>
+        </div>
+      </div>
+      <div id="AMCmpLoadingAd_agrega_5">
+        <div class="vBox" id="AMCmpLoadingAd_main">
+          <label>Test label 1: </label>
+          <input type="text" id="test_input_1"/>
+          <label>Test label 2: </label>
+          <input type="text" id="test_input_2"/>
+          <label>Test label 3: </label>
+          <input type="text" id="test_input_3"/>
+          <label>Test label 4: </label>
+          <input type="text" id="test_input_4"/>
+          <label class="addChild">Test label 5:</label>
+          <input class="addChild" type="text" id="test_input_5"/>
+        </div>
+      </div>
+      <div id="AMCmpLoadingAd_agrega_5_6_y_7">
+        <div class="vBox" id="AMCmpLoadingAd_main">
+          <label>Test label 1: </label>
+          <input type="text" id="test_input_1"/>
+          <label>Test label 2: </label>
+          <input type="text" id="test_input_2"/>
+          <label>Test label 3: </label>
+          <input type="text" id="test_input_3"/>
+          <label>Test label 4: </label>
+          <input type="text" id="test_input_4"/>
+          <label class="addChild">Test label 5: </label>
+          <input class="addChild" type="text" id="test_input_5"/>
+          <label class="addChild">Test label 6: </label>
+          <input class="addChild" type="text" id="test_input_6"/>
+          <label class="addChild">Test label 7: </label>
+          <input class="addChild" type="text" id="test_input_7"/>
+        </div>
+      </div>
+      <div id="AMCmpLoadingAd_remueve_input_1">
+        <div class="vBox" id="AMCmpLoadingAd_main">
+          <label>Test label 1:</label>
+          <input class="removeChild" type="text" id="test_input_1"/>
+          <label>Test label 2: </label>
+          <input type="text" id="test_input_2"/>
+          <label>Test label 3: </label>
+          <input type="text" id="test_input_3"/>
+          <label>Test label 4: </label>
+          <input type="text" id="test_input_4"/>
+        </div>
+      </div>
+      <div id="AMCmpLoadingAd_remueve_2_y_4">
+        <div class="vBox" id="AMCmpLoadingAd_main">
+          <label>Test label 1:</label>
+          <input class="removeChild" type="text" id="test_input_1"/>
+          <label class="removeChild">Test label 2: </label>
+          <input class="removeChild" type="text" id="test_input_2"/>
+          <label>Test label 3: </label>
+          <input type="text" id="test_input_3"/>
+          <label class="removeChild">Test label 4: </label>
+          <input class="removeChild" type="text" id="test_input_4"/>
+        </div>
+      </div>
+    </div>
+    <script src="../assets/scripts/jquery.min.js"></script>
+    <script src="./states.js"></script>
+  </body>
+</html>

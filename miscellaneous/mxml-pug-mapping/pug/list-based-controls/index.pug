@@ -1,0 +1,86 @@
+doctype html
+html(lang="en")
+   head
+      title List-Based Controls       
+      link(rel="stylesheet" href="../assets/css/common.css")
+   body      
+      h2 mx:List
+      label List:
+      select(id="listExample" size="7")
+         option(value="A") A
+         option(value="B") B
+         option(value="C") C
+         option(value="D") D
+         option(value="E") E
+         option(value="F") F
+         option(value="G") G
+
+      h2 mx:ComboBox
+      label ComboBox:
+      select(id="comboBoxExample")
+         option(value="A") A
+         option(value="B") B
+         option(value="C") C
+         option(value="D") D
+         option(value="E") E
+         option(value="F") F
+         option(value="G") G
+
+      h2 mx:DataGrid
+      table(class="dataGrid")
+         thead
+            tr(class="gridRow")
+               th(class="dataGridHeader"): span City
+               th(class="dataGridHeader"): span Population
+               th(class="dataGridHeader"): span State           
+         tbody
+            tr(class="gridRow")
+               td(class="gridItem") Los Angeles
+               td(class="gridItem") 3,000,000
+               td(class="gridItem") CA
+            tr(class="gridRow")
+               td(class="gridItem") New York
+               td(class="gridItem") 8,000,000
+               td(class="gridItem") NY
+            tr(class="gridRow")
+               td(class="gridItem") Chicago
+               td(class="gridItem") 2,000,000
+               td(class="gridItem") IL
+
+      h2 mx:TileList
+      p: strong No se encontr&oacute; mapeo directo a HTML5, temporalmente se deja con la misma representaci&oacute;n que List
+      label TileList:
+      select(id="listExample" size="7")
+         option(value="A") A
+         option(value="B") B
+         option(value="C") C
+         option(value="D") D
+         option(value="E") E
+         option(value="F") F
+         option(value="G") G
+
+      h2 mx:HorizontalList
+      label HorizontalList:
+      select(id="horizontalListExample" class="hList" size="2")
+         option(value="A" class="hListOption") A
+         option(value="B" class="hListOption") B
+         option(value="C" class="hListOption") C
+         option(value="D" class="hListOption") D
+         option(value="E" class="hListOption") E
+         option(value="F" class="hListOption") F
+         option(value="G" class="hListOption") G
+
+      h2 mx:Tree
+      label Tree:
+      ul(class="treeView")         
+         li: span(class="caret") Beverages
+            ul(class="nested")
+                  li Water
+                  li Coffee
+                  li: span(class="caret") Tea
+                     ul(class="nested")
+                        li Black Tea
+                        li White Tea
+
+      script(src="../assets/scripts/jquery.min.js")
+      script(src="./scripts.js")

@@ -1,0 +1,24 @@
+{
+  "recursos_repmoral_lblFirmasAutorizadas": {
+    "lblFirmasAutorizadas": "lblFirmasAutorizadas"
+  },
+  "recursos_repmoral_btnAnterior": { "btnAnterior": "btnAnterior" },
+  "recursos_repmoral_btnEnviar": { "btnEnviar": "btnEnviar" },
+  "recursos_repmoral_lblcontrato": { "lblcontrato": "lblcontrato" },
+  "recursos_repmoral_lblnombre": { "lblnombre": "lblnombre" },
+  "recursos_repmoral_lblperfil": { "lblperfil": "lblperfil" },
+  "recursos_repmoral_btnCalcular": { "btnCalcular": "btnCalcular" },
+  "recursos_repmoral_btnSiguiente": { "btnSiguiente": "btnSiguiente" },
+  "recursos_lbl_cuestionario": { "cuestionario": "cuestionario" },
+  "recursos_repmoral_btnReiniciar": { "btnReiniciar": "btnReiniciar" },
+  "recursos_repmoral_lblAsesorInverPDF": {
+    "lblAsesorInverPDF": "lblAsesorInverPDF"
+  },
+  "recursos_repmoral_lblAsesorInver": { "lblAsesorInver": "lblAsesorInver" },
+  "recursos_repmoral_btnCancelar": { "btnCancelar": "btnCancelar" },
+  "medapp_estado": { "estado": "estado" },
+  "medapp_consultaNaturaleza_idReglaCorte": {
+    "consultaNaturaleza_idReglaCorte": "consultaNaturaleza_idReglaCorte"
+  },
+  "medapp_propiedadBase": { "propiedadBase": "propiedadBase" }
+}

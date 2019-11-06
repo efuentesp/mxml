@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Text Components </title>
+    <link rel="stylesheet" href="../assets/css/common.css">
+  </head>
+  <body>     
+    <h2>mx:Label</h2>
+    <label>Label:</label>
+    <label>Label</label>
+    <h2>mx:Text</h2>
+    <label>Text:</label>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <h2>mx:TextInput</h2>
+    <label>TextInput: </label>
+    <input type="text" id="textInput1">
+    <h2>mx:TextArea</h2>
+    <label>TextArea:</label>
+    <textarea id="textArea1" rows="4" cols="50"></textarea>
+    <h2>mx:RichTextEditor</h2>
+    <p>No se tiene un mapero directo a HTML5</p>
+    <h2>mx:FormItem</h2>
+    <p>mx:FormItem label="Fecha de Liquidación"</p>
+    <label>Fecha de Liquidación</label>
+    <p>mx:FormItem id="lblEstado" label="{resourceManager.getString('medapp','estado')}:" required="true"</p>
+    <label id="lblEstado" data-i18n="medapp_estado.estado"><span class="required">*</span></label>
+    <p>mx:FormItem id="lblNaturaleza" label="{resourceManager.getString('medapp','consultaNaturaleza.idReglaCorte')}:"</p>
+    <label id="lblNaturaleza" data-i18n="medapp_consultaNaturaleza_idReglaCorte.consultaNaturaleza_idReglaCorte"></label>
+    <p>mx:FormItem label="{inicio}" id="fIInicio"</p>
+    <label id="fIInicio">inicio</label>
+    <p>mx:FormItem label="{resourceManager.getString('medapp','propiedadBase')}:" visible="false" height="0" paddingBottom="0" paddingTop="0"</p>
+    <label data-i18n="medapp_propiedadBase.propiedadBase" style="visibility: hidden; padding-top:0; padding-bottom:0"></label>
+    <script src="../assets/scripts/jquery.min.js">     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.0/jquery-i18next.min.js"></script>
+    <script src="https://unpkg.com/i18next/i18next.js"></script>
+    <script src="https://unpkg.com/i18next-xhr-backend/i18nextXHRBackend.js"></script>
+    <script src="../assets/i18n/i18nextScript.js"></script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+doctype html
+html(lang="en")
+   head
+      title Text Components 
+      link(rel="stylesheet" href="../assets/css/common.css")
+   body      
+      h2 mx:Label
+      label Label:
+      label Label
+      h2 mx:Text
+      label Text:
+      p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      h2 mx:TextInput
+      label TextInput: 
+      input(type="text" id="textInput1")
+      h2 mx:TextArea
+      label TextArea:
+      textarea(id="textArea1" rows="4" cols="50")
+      h2 mx:RichTextEditor
+      p No se tiene un mapero directo a HTML5
+      h2 mx:FormItem
+      include ./form-item.pug
+      script(src="../assets/scripts/jquery.min.js")      
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js')
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.0/jquery-i18next.min.js')
+      script(src='https://unpkg.com/i18next/i18next.js')
+      script(src='https://unpkg.com/i18next-xhr-backend/i18nextXHRBackend.js')
+      script(src='../assets/i18n/i18nextScript.js')

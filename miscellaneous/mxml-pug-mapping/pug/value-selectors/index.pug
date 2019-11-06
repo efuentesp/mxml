@@ -1,0 +1,27 @@
+doctype html
+html(lang="en")
+   head
+      title Value Selectors 
+      link(rel="stylesheet" href="../assets/css/common.css")
+   body      
+      h2 mx:HSlider
+      label HSlider: 
+      input(type="range" class="hSlider" min="1" max="100" value="50")
+      h2 mx:VSlider
+      label VSlider: 
+      input(type="range" class="vSlider" min="1" max="100" value="50")
+      h2 mx:NumericStepper
+      label NumericStepper: 
+      input(type="number")
+      h2 mx:ColorPicker
+      label ColorPicker:
+      input(type="color")
+      h2 mx:DateField
+      label DateField:
+      input(type="date")
+      h2 mx:DateChooser
+      p Siempre muestra el calendario expandido y permite seleccionar múltiples fechas y rangos de fechas
+      label DateChooser:
+         input(type="date" )
+
+      script(src="../assets/scripts/jquery.min.js")

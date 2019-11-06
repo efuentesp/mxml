@@ -1,0 +1,30 @@
+doctype html
+html(lang="en")
+   head
+      title Advanced Data Controls   
+      link(rel="stylesheet" href="../assets/css/common.css")
+   body      
+      h2 mx:AdvancedDataGrid
+      p Por el momento se deja el componente AdvanceDataGrid como un DataGrid
+      table(class="dataGrid")
+         thead
+            tr(class="gridRow")
+               th(class="dataGridHeader"): span City
+               th(class="dataGridHeader"): span Population
+               th(class="dataGridHeader"): span State           
+         tbody
+            tr(class="gridRow")
+               td(class="gridItem") Los Angeles
+               td(class="gridItem") 3,000,000
+               td(class="gridItem") CA
+            tr(class="gridRow")
+               td(class="gridItem") New York
+               td(class="gridItem") 8,000,000
+               td(class="gridItem") NY
+            tr(class="gridRow")
+               td(class="gridItem") Chicago
+               td(class="gridItem") 2,000,000
+               td(class="gridItem") IL
+      
+      script(src="../assets/scripts/jquery.min.js")
+      script(src="./scripts.js")

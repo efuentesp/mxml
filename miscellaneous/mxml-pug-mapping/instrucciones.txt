@@ -1,0 +1,6 @@
+Para compilar PUG:
+ Abir un GITBash con la ruta del directorio pug
+ Compilar con la instrucción  pug -w . -o ../dist -P
+
+
+	

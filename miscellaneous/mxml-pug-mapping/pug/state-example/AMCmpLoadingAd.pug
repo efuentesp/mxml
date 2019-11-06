@@ -1,0 +1,28 @@
+html(lang="en")
+   head
+      title Text Components 
+      link(rel="stylesheet" href="../assets/css/common.css")
+   body
+      div(id="AMCmpLoadingAd_states" class="states") 
+         button(id="btn_AMCmpLoadingAd_baseState") AMCmpLoadingAd [baseState]
+         button(id="btn_AMCmpLoadingAd_agrega_5") AMCmpLoadingAd [agrega_5]
+         button(id="btn_AMCmpLoadingAd_agrega_5_6_y_7") AMCmpLoadingAd [agrega_5_6_y_7]
+         button(id="btn_AMCmpLoadingAd_remueve_input_1") AMCmpLoadingAd [remueve_input_1]
+         button(id="btn_AMCmpLoadingAd_remueve_2_y_4") AMCmpLoadingAd [remueve_2_y_4]
+         div(id="AMCmpLoadingAd_baseState")
+            div(id="AMCmpLoadingAd_main" class="vBox")
+               label Test label 1: 
+               input(type="text" id="test_input_1")
+               label Test label 2: 
+               input(type="text" id="test_input_2")
+               label Test label 3: 
+               input(type="text" id="test_input_3")
+               label Test label 4: 
+               input(type="text" id="test_input_4")
+         include ./AMCmpLoadingAd_agrega_5.pug
+         include ./AMCmpLoadingAd_agrega_5_6_y_7.pug
+         include ./AMCmpLoadingAd_remueve_input_1.pug
+         include ./AMCmpLoadingAd_remueve_2_y_4.pug
+
+      script(src="../assets/scripts/jquery.min.js")
+      script(src="./states.js")

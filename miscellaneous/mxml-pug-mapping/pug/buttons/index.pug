@@ -1,0 +1,31 @@
+doctype html
+html(lang="en")
+   head
+      title Buttons      
+      link(rel="stylesheet" href="../assets/css/common.css")
+   body      
+      h2 mx:Button
+      button(type="button") Name
+
+      h2 mx:LinkButton
+      a(href="#"): button(class="linkButton" type="button") Name
+
+      h2 mx:RadioButton
+      label Radio Example:          
+         input(type="radio" name="radioExample" id="radioA" value="a")
+         | A         
+         input(type="radio" name="radioExample" id="radioB" value="b")
+         | B
+         input(type="radio" name="radioExample" id="radioC" value="c")
+         | C
+
+      h2 mx:CheckBox
+      label CheckBox Example: 
+         input(type="checkbox" name="checkBoxExample" id="checkboxA" value="a")
+         | A
+         input(type="checkbox" name="checkBoxExample" id="checkboxB" value="b")
+         | B
+         input(type="checkbox" name="checkBoxExample" id="checkboxC" value="c")
+         | C
+
+      script(src="../assets/scripts/jquery.min.js")

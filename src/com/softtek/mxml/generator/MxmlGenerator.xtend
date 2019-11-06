@@ -31,7 +31,7 @@ class MxmlGenerator extends AbstractGenerator {
 		appStates = new LinkedHashMap<String,LinkedHashSet<State>>()
 		appStates = State.getAppStates(resource)	
 		pugGenerator.doGenerator(resource,fsa, appStates)	
-//		appComponentListGenerator.doGenerator(resource,fsa) 
+		appComponentListGenerator.doGenerator(resource,fsa) 
 		jsonResourceGenerator.doGenerator(resource,fsa)	
 		if(appStates !== null && !appStates.empty){
 			jsStateGenerator.doGenerator(fsa, appStates)
