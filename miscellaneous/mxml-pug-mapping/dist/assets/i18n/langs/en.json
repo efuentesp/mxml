@@ -20,5 +20,6 @@
   "medapp_consultaNaturaleza_idReglaCorte": {
     "consultaNaturaleza_idReglaCorte": "consultaNaturaleza_idReglaCorte"
   },
-  "medapp_propiedadBase": { "propiedadBase": "propiedadBase" }
+  "medapp_propiedadBase": { "propiedadBase": "propiedadBase" },
+  "medapp_emisionesIndeval": { "emisionesIndeval": "emisionesIndeval" }
 }

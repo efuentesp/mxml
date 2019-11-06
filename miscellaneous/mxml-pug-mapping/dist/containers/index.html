@@ -6,13 +6,40 @@
   </head>
   <body> 
     <h2>mx:HBox</h2>
+    <p>mx:HBox id="hBoxTiposTraspaso" width="980" height="90%" horizontalAlign="center" verticalAlign="middle" horizontalScrollPolicy="off" styleName="containerTab" paddingBottom="15"</p>
+    <div class="hBox" id="hBoxTiposTraspaso">
+      <input type="text">
+      <input type="text">
+      <input type="text">
+    </div>
+    <p>mx:HBox width="100%" height="100%"</p>
     <div class="hBox">
       <input type="text">
       <input type="text">
       <input type="text">
     </div>
     <h2>mx:VBox</h2>
+    <p>mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" verticalAlign="middle" horizontalAlign="center" width="90%" height="90%"</p>
     <div class="vBox">
+      <input type="text">
+      <input type="text">
+      <input type="text">
+    </div>
+    <p>mx:VBox id="vBoxMain" width="0" height="0" horizontalAlign="center" visible="false" verticalAlign="middle" paddingTop="0" verticalGap="0"</p>
+    <div class="vBox" id="vBoxMain" style="visibility: hidden">
+      <input type="text">
+      <input type="text">
+      <input type="text">
+    </div>
+    <p>mx:VBox id="vBoxDtg" width="100%" horizontalAlign="center" paddingTop="5"</p>
+    <div class="vBox" id="vBoxDtg">
+      <input type="text">
+      <input type="text">
+      <input type="text">
+    </div>
+    <p>mx:VBox id="vBoxEmisionesIndeval" label="{resourceManager.getString('medapp','emisionesIndeval')}" width="100%" height="100%" horizontalScrollPolicy="off"</p>
+    <div class="vBox" id="vBoxEmisionesIndeval">
+      <label data-i18n="medapp_emisionesIndeval.emisionesIndeval"></label>
       <input type="text">
       <input type="text">
       <input type="text">
@@ -76,6 +103,11 @@
         <input type="text">
       </form>
     </div>
-    <script src="../assets/scripts/jquery.min.js"></script>
+    <script src="../assets/scripts/jquery.min.js">     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.0/jquery-i18next.min.js"></script>
+    <script src="https://unpkg.com/i18next/i18next.js"></script>
+    <script src="https://unpkg.com/i18next-xhr-backend/i18nextXHRBackend.js"></script>
+    <script src="../assets/i18n/i18nextScript.js"></script>
   </body>
 </html>

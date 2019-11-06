@@ -213,7 +213,7 @@ class PugElementGenerator {
 			«util.getIndentation(indentation)»label(«util.getConcatAttrs(n, null)»)
 		«ELSEIF no !== null»			
 			«util.getIndentation(indentation)»label(«NodeOverride.getConcatAttrs(no, null)»)
-		«ENDIF»
+		«ENDIF»		
 	'''
 	
 	def String genText(int indentation, Node n, NodeOverride no)'''		

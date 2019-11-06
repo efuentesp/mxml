@@ -5,7 +5,7 @@ html(lang="en")
       link(rel="stylesheet" href="../assets/css/common.css")
    body      
       h2 mx:Button
-      button(type="button") Name
+      include ./button.pug
 
       h2 mx:LinkButton
       a(href="#"): button(class="linkButton" type="button") Name
@@ -28,4 +28,9 @@ html(lang="en")
          input(type="checkbox" name="checkBoxExample" id="checkboxC" value="c")
          | C
 
-      script(src="../assets/scripts/jquery.min.js")
+      script(src="../assets/scripts/jquery.min.js")      
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js')
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.0/jquery-i18next.min.js')
+      script(src='https://unpkg.com/i18next/i18next.js')
+      script(src='https://unpkg.com/i18next-xhr-backend/i18nextXHRBackend.js')
+      script(src='../assets/i18n/i18nextScript.js')

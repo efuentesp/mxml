@@ -1,0 +1,17 @@
+p mx:Button id="btnSi" label="Aceptar" styleName="btnSi"
+button(type="button" id="btnSi") Aceptar
+
+p mx:Button id="btnNo" label="No" click="cancelaAgregaTransaccion(event)" styleName="btnNo" width="75"
+button(type="button" id="btnNo" title="click=cancelaAgregaTransaccion(event)") No
+
+p mx:Button id="txiFolioInstTrasp" width="45" height="30" label="{cmbNombreInstTrasp.selectedItem.folioInstitucion}" styleName="btnFolio"
+button(type="button" id="btnNo" title="click=cancelaAgregaTransaccion(event)") cmbNombreInstTrasp.selectedItem.folioInstitucion
+
+p mx:Button id="btnCancelarMultiple" label="Limpiar" enabled="false" click="construyeCancelacionMultiple()" styleName="btnLimpiar"
+button(type="button" id="btnCancelarMultiple" title="click=construyeCancelacionMultiple()" disabled) Limpiar
+
+p mx:Button id="btnAdd" toolTip="Agregar archivo" click="addFiles()" icon="@Embed('/images/fileUpload/add.png')" width="26"
+button(type="button" id="btnAdd" title="toolTip=Agregar archivo click=construyeCancelacionMultiple()" disabled) @Embed('/images/fileUpload/add.png')
+
+p mx:Button id="btnShowErrors" icon="@Embed('/images/fileUpload/next.png')" label="Muestra Errores" click="{this.currentState='st_results'}"
+button(type="button" id="btnShowErrors" title="click={this.currentState='st_results'}") Muestra Errores @Embed('/images/fileUpload/next.png')

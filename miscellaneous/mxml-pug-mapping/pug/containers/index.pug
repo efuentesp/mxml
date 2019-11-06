@@ -6,16 +6,10 @@ html(lang="en")
    body  
           
       h2 mx:HBox
-      div(class="hBox")
-         input(type="text")
-         input(type="text")
-         input(type="text")   
+      include hbox.pug
 
       h2 mx:VBox
-      div(class="vBox")
-         input(type="text")
-         input(type="text")
-         input(type="text")
+      include vbox.pug
 
       h2 mx:Canvas
       div(class="canvas")
@@ -68,5 +62,10 @@ html(lang="en")
 
 
       
-      script(src="../assets/scripts/jquery.min.js")
+      script(src="../assets/scripts/jquery.min.js")      
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js')
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.0/jquery-i18next.min.js')
+      script(src='https://unpkg.com/i18next/i18next.js')
+      script(src='https://unpkg.com/i18next-xhr-backend/i18nextXHRBackend.js')
+      script(src='../assets/i18n/i18nextScript.js')
       

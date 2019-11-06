@@ -339,3 +339,7 @@ html ul.tabs li.active a:hover {
 .setStyle {
   background: #fed7e2;
 }
+
+.required {
+  color: red;
+}
