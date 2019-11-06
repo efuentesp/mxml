@@ -15,3 +15,6 @@ button(type="button" id="btnAdd" title="toolTip=Agregar archivo click=construyeC
 
 p mx:Button id="btnShowErrors" icon="@Embed('/images/fileUpload/next.png')" label="Muestra Errores" click="{this.currentState='st_results'}"
 button(type="button" id="btnShowErrors" title="click={this.currentState='st_results'}") Muestra Errores @Embed('/images/fileUpload/next.png')
+
+p mx:Button id="btnShowErrors"  label="{resourceManager.getString('medapp','estado')}:" click="{this.currentState='st_results'}"
+button(type="button" id="btnShowErrors" title="click={this.currentState='st_results'} icon=@Embed('/images/fileUpload/next.png')" data-i18n="medapp_estado.estado")

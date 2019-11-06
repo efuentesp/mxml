@@ -11,3 +11,5 @@
 <button type="button" id="btnAdd" title="toolTip=Agregar archivo click=construyeCancelacionMultiple()" disabled="disabled">@Embed('/images/fileUpload/add.png')</button>
 <p>mx:Button id="btnShowErrors" icon="@Embed('/images/fileUpload/next.png')" label="Muestra Errores" click="{this.currentState='st_results'}"</p>
 <button type="button" id="btnShowErrors" title="click={this.currentState='st_results'}">Muestra Errores @Embed('/images/fileUpload/next.png')</button>
+<p>mx:Button id="btnShowErrors"  label="{resourceManager.getString('medapp','estado')}:" click="{this.currentState='st_results'}"</p>
+<button type="button" id="btnShowErrors" title="click={this.currentState='st_results'} icon=@Embed('/images/fileUpload/next.png')" data-i18n="medapp_estado.estado"></button>
