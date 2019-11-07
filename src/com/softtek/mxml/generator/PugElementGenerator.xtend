@@ -15,8 +15,7 @@ class PugElementGenerator {
                        + "script(src=\'https://unpkg.com/i18next-xhr-backend/i18nextXHRBackend.js')\n"
                        + "script(src=\'../assets/i18n/i18nextScript.js')\n"
                        + "script(src='../assets/states/states.js')"
-                       
-	
+    
 	def CharSequence getNodeType(int indentation, NodeOverride no, LinkedHashMap<String, String> nsl, String fname)'''	
 		«getNodeOverride(indentation, no, nsl, fname)»
 	'''	
@@ -138,7 +137,7 @@ class PugElementGenerator {
 	//Buttons
 	
 	def String genButton(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»button( «NodeOverride.getConcatAttrs(no, null)»)
+			«util.getIndentation(indentation)»button( «NodeOverride.getConcatAttrs(no, util.skipAttrsButton)»)
 	'''
 	
 	def String genLinkButton(int indentation, NodeOverride no)'''
@@ -314,11 +313,11 @@ class PugElementGenerator {
 	// Containers
 	
 	def String genHBox(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»div(class="hBox«getOverride(no, "OnlyClass")»")
+			«util.getIndentation(indentation)»div(class="hBox«getOverride(no, "OnlyClass")»" «NodeOverride.getConcatAttrs(no, util.skipAttrsHBox)»)
 	'''
 	
 	def String genVBox(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»div(class="vBox«getOverride(no, "OnlyClass")»")
+			«util.getIndentation(indentation)»div(class="vBox«getOverride(no, "OnlyClass")»" «NodeOverride.getConcatAttrs(no, util.skipAttrsVBox)»)
 	'''
 	
 	def String genCanvas(int indentation, NodeOverride no)'''
@@ -355,9 +354,8 @@ class PugElementGenerator {
 	'''
 	
 	def String genFormItem(int indentation, NodeOverride no)'''
-		«util.getIndentation(indentation)»label(class="formItem"«NodeOverride.getConcatAttrs(no, null)»)
+		«util.getIndentation(indentation)»label(class="formItem"«NodeOverride.getConcatAttrs(no,util.skipAttrsFormItem)»)
 	'''
-	
 	
 	
 	// Other

@@ -6,6 +6,7 @@ import java.util.LinkedHashMap
 import java.util.LinkedHashSet
 import java.util.ArrayList
 import java.util.List
+import java.util.Arrays
 
 class Util {	
 	
@@ -196,5 +197,31 @@ class Util {
 		}
 		return result
 	}
+	
+	
+	//Skip Attribute Lists
+	 public ArrayList<String> skipAttrsFormItem = new ArrayList<String>(Arrays.asList("paddingTop", "paddingBottom", "width","height","direction"));
+	 
+	 public ArrayList<String> skipAttrsButton = new ArrayList<String>(Arrays.asList("skin", "width", "height","styleName","direction","textAlign",
+	                                                                                "borderColor","labelPlacement","buttonMode","useHandCursor",
+	                                                                                "horizontalCenter","bottom","xmlns:mx","implements"));
+	                                                                                
+	 public ArrayList<String> skipAttrsHBox = new ArrayList<String>(Arrays.asList("width","paddingTop","verticalScrollPolicy","horizontalScrollPolicy",
+	                                                                                "horizontalAlign","height","verticalAlign","horizontalGap",
+	                                                                                "styleName","paddingBottom","paddingLeft","paddingRight",
+	                                                                                "minHeight","xmlns:mx","xmlns:controls","xmlns:view","creationComplete",
+	                                                                                "implements","xmlns:mate","right","xmlns:views","initialize",
+	                                                                                "xmlns:maps","disabledOverlayAlpha"))
+	                                                                                
+	 public ArrayList<String> skipAttrsVBox = new ArrayList<String>(Arrays.asList("width","height","paddingTop","verticalGap","horizontalAlign",
+	                                                                               "verticalAlign","creationComplete","paddingBottom","paddingLeft",
+	                                                                               "visible","x","y","verticalScrollPolicy","paddingRight","initialize",
+	                                                                               "horizontalScrollPolicy","scroll","backgroundAlpha","backgroundColor",
+	                                                                               "cornerRadius","left","right","horizontalCenter","verticalCenter",
+	                                                                               "disabledOverlayAlpha","implements","xmlns:mx","xmlns:viewCmp",
+	                                                                               "xmlns:validatorCmp","xmlns:rm","xmlns:components","xmlns:cmpView",
+	                                                                               "xmlns:cmpViewRender","xmlns:cmpViewUpload","xmlns:com","xmlns:component",
+	                                                                               "xmlns:vista","xmlns:views", "xmlns:controls", "xmlns:view"))                                                                               
+	      
     
 }
