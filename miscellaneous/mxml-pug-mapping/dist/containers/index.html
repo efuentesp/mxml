@@ -75,10 +75,30 @@
       </div>
     </div>
     <h2>mx:Panel</h2>
+    <p>mx:Panel styleName="containerGenerico" title="TIPO DE OPERACIÓN" width="60%" verticalScrollPolicy="off" horizontalScrollPolicy="off" paddingBottom="5"</p>
     <div class="panel">
       <div class="panelTitle">
-        <p>Panel Title Content</p>
+        <p>TIPO DE OPERACIÓN</p>
       </div>
+      <div class="panelContent">
+        <input type="text">
+        <input type="text">
+        <input type="text">
+      </div>
+    </div>
+    <p>mx:Panel title="{resourceManager.getString('medapp','filtro')}" id="filtro" resizeEffect="efecto"</p>
+    <div class="panel" id="filtro">
+      <div class="panelTitle">
+        <p data-i18n="medapp_filtro.filtro"></p>
+      </div>
+      <div class="panelContent">
+        <input type="text">
+        <input type="text">
+        <input type="text">
+      </div>
+    </div>
+    <p>mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" width="1000" height="475" paddingTop="10" mlns:cmpView="mx.com.accival.utils.indeval.traspasos.view.*" layout="vertical" horizontalAlign="center" verticalAlign="middle" creationComplete="init(event)"</p>
+    <div class="panel">    
       <div class="panelContent">
         <input type="text">
         <input type="text">

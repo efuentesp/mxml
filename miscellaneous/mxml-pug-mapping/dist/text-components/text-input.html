@@ -1,0 +1,7 @@
+
+<p>mx:TextInput id="txiCantidad" restrict="0-9" maxChars="16" width="132" focusOut="{LiqUtils.generaFormato(txiCantidad)}"</p>
+<input type="text" id="txiCantidad"/>
+<p>mx:TextInput id="txtcuponVigente" enabled="false" width="55"</p>
+<input type="text" id="txtcuponVigente" disabled="disabled"/>
+<p>mx:TextInput restrict="0-9\-" change="validarInformacion(event)" keyUp="{refrescarEnter(event)}" keyDown="{manejaTab(event)}" focusOut="{focoFuera(event)}" disabledColor="{MedClsConstantes.COLOR_FONDO_DESHABILITADO_ADVANCED_DATAGRID}"</p>
+<input type="text"/>

@@ -22,5 +22,10 @@
   },
   "medapp_propiedadBase": { "propiedadBase": "propiedadBase" },
   "medapp_emisionesIndeval": { "emisionesIndeval": "emisionesIndeval" },
-  "medapp_catalogoTipoValor": { "catalogoTipoValor": "catalogoTipoValor" }
+  "medapp_catalogoTipoValor": { "catalogoTipoValor": "catalogoTipoValor" },
+  "medapp_idMercadoTitulo": { "idMercadoTitulo": "idMercadoTitulo" },
+  "medapp_respuestaTipoDerecho": {
+    "respuestaTipoDerecho": "respuestaTipoDerecho"
+  },
+  "medapp_filtro": { "filtro": "filtro" }
 }

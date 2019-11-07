@@ -6,17 +6,34 @@
   </head>
   <body>     
     <h2>mx:Label</h2>
-    <label>Label:</label>
-    <label>Label</label>
+    <p>id="lblErrorHeader" text="Se encontraron los siguientes errores en el archivo procesado: " fontSize="12" fontWeight="bold"/</p>
+    <label id="lblErrorHeader">Se encontraron los siguientes errores en el archivo procesado:</label>
+    <p>mx:Label text="{resourceManager.getString('medapp', 'respuestaTipoDerecho')}" height="50" width="100%"</p>
+    <label data-i18n="medapp_respuestaTipoDerecho.respuestaTipoDerecho"></label>
+    <p>mx:Label id="txt1" width="100%" textAlign="center" toolTip="{resourceManager.getString('medapp',toolTip1)}"</p>
+    <label data-i18n="medapp_toolTip1.toolTip1"></label>
     <h2>mx:Text</h2>
-    <label>Text:</label>
+    <p>mx:Text text="Nombre"</p>
+    <label>Nombre</label>
+    <p>mx:Text text="{resourceManager.getString('medapp','idMercadoTitulo')}</p>
+    <label data-i18n="medapp_idMercadoTitulo.idMercadoTitulo"></label>
+    <p>mx:Text text="Nombre" id="lblNombre"</p>
+    <label id="lblNombre">Nombre</label>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     <h2>mx:TextInput</h2>
-    <label>TextInput: </label>
-    <input type="text" id="textInput1">
+    <p>mx:TextInput id="txiCantidad" restrict="0-9" maxChars="16" width="132" focusOut="{LiqUtils.generaFormato(txiCantidad)}"</p>
+    <input type="text" id="txiCantidad">
+    <p>mx:TextInput id="txtcuponVigente" enabled="false" width="55"</p>
+    <input type="text" id="txtcuponVigente" disabled>
+    <p>mx:TextInput restrict="0-9\-" change="validarInformacion(event)" keyUp="{refrescarEnter(event)}" keyDown="{manejaTab(event)}" focusOut="{focoFuera(event)}" disabledColor="{MedClsConstantes.COLOR_FONDO_DESHABILITADO_ADVANCED_DATAGRID}"</p>
+    <input type="text">
     <h2>mx:TextArea</h2>
-    <label>TextArea:</label>
-    <textarea id="textArea1" rows="4" cols="50"></textarea>
+    <p>mx:TextArea id="txaAlert" width="300" textAlign="center" wordWrap="true" selectable="false" editable="false" borderStyle="none</p>
+    <textarea id="textArea1" rows="4" cols="50" disabled></textarea>
+    <p>mx:TextArea width="284" wordWrap="true" textAlign="center" selectable="false" editable="false" borderStyle="none" text="Ya existe un traspaso con estos datos. ¿Deseas continuar agregándolo?"</p>
+    <textarea rows="4" cols="50">Ya existe un traspaso con estos datos. ¿Deseas continuar agregándolo?</textarea>
+    <p>mx:TextArea editable="false" text="{this._errores.descripcionError}" fontWeight="bold"</p>
+    <textarea rows="4" cols="50" disabled>this._errores.descripcionError</textarea>
     <h2>mx:RichTextEditor</h2>
     <p>No se tiene un mapero directo a HTML5</p>
     <h2>mx:FormItem</h2>
