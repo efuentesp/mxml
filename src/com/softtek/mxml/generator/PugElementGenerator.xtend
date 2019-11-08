@@ -123,15 +123,15 @@ class PugElementGenerator {
 	'''
 	
 	def String genText(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»label(«NodeOverride.getConcatAttrs(no, null)»)
+			«util.getIndentation(indentation)»label(«NodeOverride.getConcatAttrs(no, util.skipAttrsText)»)
 	'''
 		
 	def String genTextInput(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»input(type="text" «NodeOverride.getConcatAttrs(no, null)»)
+			«util.getIndentation(indentation)»input(type="text" «NodeOverride.getConcatAttrs(no, util.skipAttrsTextInput)»)
 	'''
 	
 	def String genTextArea(int indentation, NodeOverride no)'''	
-			«util.getIndentation(indentation)»textarea( «NodeOverride.getConcatAttrs(no, null)»)
+			«util.getIndentation(indentation)»textarea( «NodeOverride.getConcatAttrs(no, util.skipAttrsTextArea)»)
 	'''
 	
 	//Buttons
@@ -335,7 +335,7 @@ class PugElementGenerator {
 	'''
 	
 	def String genPanel(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»div(class="panel«getOverride(no, "OnlyClass")»")
+			«util.getIndentation(indentation)»div(class="panel«getOverride(no, "OnlyClass")»" «NodeOverride.getConcatAttrs(no, util.skipAttrsPanel)»)
 «««			«util.getIndentation(indentation+1)»div(class="panelTitle")
 «««			«util.getIndentation(indentation+2)»p Panel Title
 			«util.getIndentation(indentation+1)»div(class="panelContent")

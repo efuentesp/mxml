@@ -221,7 +221,20 @@ class Util {
 	                                                                               "disabledOverlayAlpha","implements","xmlns:mx","xmlns:viewCmp",
 	                                                                               "xmlns:validatorCmp","xmlns:rm","xmlns:components","xmlns:cmpView",
 	                                                                               "xmlns:cmpViewRender","xmlns:cmpViewUpload","xmlns:com","xmlns:component",
-	                                                                               "xmlns:vista","xmlns:views", "xmlns:controls", "xmlns:view"))                                                                               
-	      
-    
+	                                                                               "xmlns:vista","xmlns:views", "xmlns:controls", "xmlns:view"))     
+	  
+	  public ArrayList<String> skipAttrsText = new ArrayList<String>(Arrays.asList("width","selectable"));                        
+
+      public ArrayList<String> skipAttrsTextArea = new ArrayList<String>(Arrays.asList("width","textAlign","wordWrap","selectable","borderStyle","height", 
+                                                                                       "htmlText","horizontalScrollPolicy","verticalScrollPolicy","fontWeight",
+                                                                                       "borderThickness","paddingLeft","paddingBottom","paddingRight","paddingTop")); 
+                                                                                       
+      public ArrayList<String> skipAttrsTextInput = new ArrayList<String>(Arrays.asList("restrict","maxChars","width","focusOut","editable","change","text",
+                                                                                        "textAlign","keyUp","keyDown","disabledColor","enter"));
+       
+      public ArrayList<String> skipAttrsPanel = new ArrayList<String>(Arrays.asList("styleName","width","verticalScrollPolicy","horizontalScrollPolicy",
+      	                                                                            "paddingBottom","layout","horizontalAlign","paddingLeft","paddingRight",
+      	                                                                            "xmlns:mx","height", "paddingTop", "xmlns:cmpView", "verticalAlign", 
+                                                                                    "creationComplete", "resizeEffect", "titleStyleName")); 
+                                                                       
 }
