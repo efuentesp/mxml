@@ -335,9 +335,9 @@ class PugElementGenerator {
 	'''
 	
 	def String genPanel(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»div(class="panel" «NodeOverride.getConcatAttrs(no, util.skipAttrsPanel)»)
-«««			«util.getIndentation(indentation+1)»div(class="panelTitle")
-«««			«util.getIndentation(indentation+2)»p Panel Title
+			«util.getIndentation(indentation)»div(class="panel" «NodeOverride.getConcatAttrsNoDataResource(no, util.skipAttrsPanel)»)
+			«util.getIndentation(indentation+1)»div(class="panelTitle")
+			«util.getIndentation(indentation+2)»«NodeOverride.getAttrCheckI18next(no,"title")»
 			«util.getIndentation(indentation+1)»div(class="panelContent")
 	'''
 	

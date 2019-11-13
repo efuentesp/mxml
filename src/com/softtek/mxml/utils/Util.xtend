@@ -235,6 +235,6 @@ class Util {
       public ArrayList<String> skipAttrsPanel = new ArrayList<String>(Arrays.asList("styleName","width","verticalScrollPolicy","horizontalScrollPolicy",
       	                                                                            "paddingBottom","layout","horizontalAlign","paddingLeft","paddingRight",
       	                                                                            "xmlns:mx","height", "paddingTop", "xmlns:cmpView", "verticalAlign", 
-                                                                                    "creationComplete", "resizeEffect", "titleStyleName")); 
+                                                                                    "creationComplete", "resizeEffect", "titleStyleName","title")); 
                                                                        
 }

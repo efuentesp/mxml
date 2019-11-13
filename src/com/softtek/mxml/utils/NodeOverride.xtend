@@ -53,8 +53,46 @@ class NodeOverride {
 	
 	def static String getAttr(NodeOverride node, String key){
 		for( a : node.attrs.toList)
-		   	if(a.key.equals(key))  return (a.value)			
+		   	if(a.key.equals(key)) 
+		   	  return (a.value)			
 	}
+	
+
+	def static String getAttrCheckI18next(NodeOverride node, String key){
+		for( a : node.attrs.toList)
+		   	if(a.key.equals(key)) {
+		   	  var res= a.value
+		   	  if (a.value.contains("resourceManager")) {
+    			    res = "p(data-i18n" + "=\"" + getdatai18n(a.value) + "\")" 
+    			    return res 
+    		  }
+    		  return "p " + res
+    		}	
+    	return ""	
+	}
+	
+	
+	def static String getConcatAttrsNoDataResource(NodeOverride node, ArrayList<String> attrToSkip){
+    	var String attrs = ""
+    	var ArrayList<String> charstoremove = new ArrayList<String>();
+    	charstoremove.add("{")
+    	charstoremove.add("}")
+    	if(!node.attrs.empty){
+    		for(attr : node.attrs){   
+    			var String value= attr.value
+    				if(attrToSkip !== null && !attrToSkip.empty){
+    					if(!attrToSkip.contains(attr.key)){
+    						attrs += " " + attr.key + "=\"" + new Util().replaceStrings(charstoremove ,value)  + "\""
+    					}
+    				}else if( attr.key.equals("flexOverride")){
+    					attrs += " class=\"" + new Util().replaceStrings(charstoremove ,value)  + "\""
+    				}else{
+    					attrs += " " + attr.key + "=\"" + new Util().replaceStrings(charstoremove ,value) + "\""
+    				}			 	   					
+    		}
+    	}    
+    	return checkHtmlAttrClass(attrs)
+    }
 	
 	def static String getConcatAttrs(NodeOverride node, ArrayList<String> attrToSkip){
     	var String attrs = ""
