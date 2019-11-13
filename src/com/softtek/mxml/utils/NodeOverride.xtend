@@ -65,9 +65,9 @@ class NodeOverride {
     		for(attr : node.attrs){   
     			var String value= attr.value			
     			if (attr.value.contains("?resourceManager")) {    
-    			  attrs += " class=\"ternaryOperation\" data-i18n" + "=\"" + new Util().getFileNameAndResourceFromAttrs(attr.value).entrySet.get(0).value+"."+new Util().getFileNameAndResourceFromAttrs(attr.value).entrySet.get(0).key + "\""
+    			   attrs += " class=\"ternaryOperation\" data-i18n" + "=\"" + getdatai18n(attr.value)+ "\""
     			}else if (attr.value.contains("resourceManager")) {
-    				attrs += " " + "data-i18n" + "=\"" + new Util().getFileNameAndResourceFromAttrs(attr.value).entrySet.get(0).value+"."+new Util().getFileNameAndResourceFromAttrs(attr.value).entrySet.get(0).key + "\""    			    			
+    			   attrs += " " + "data-i18n" + "=\"" + getdatai18n(attr.value) + "\""    			    			
     			}else{
     				if(attrToSkip !== null && !attrToSkip.empty){
     					if(!attrToSkip.contains(attr.key)){
@@ -84,7 +84,12 @@ class NodeOverride {
     	return checkHtmlAttrClass(attrs)
     }
     
-       
+    def static String getdatai18n(String value){
+    	var entry_value = new Util().getFileNameAndResourceFromAttrs(value).entrySet.get(0).value
+    	var entry_key = new Util().getFileNameAndResourceFromAttrs(value).entrySet.get(0).key
+    	return entry_value+"_"+entry_key+"."+entry_key.split("_").get(entry_key.split("_").size-1)	
+    }
+    
     def static String checkHtmlAttrClass(String attr){    	
     	var String[] attrs = attr.split(" ")
     	var int count = 0
