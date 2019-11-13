@@ -70,6 +70,19 @@ class NodeOverride {
     	return ""	
 	}
 	
+	def static String getAttrCheckI18NextLabel(NodeOverride node, String key){
+		for( a : node.attrs.toList)
+		   	if(a.key.equals(key)) {
+		   	  var res= a.value
+		   	  if (a.value.contains("resourceManager")) {
+    			    res = "label(data-i18n" + "=\"" + getdatai18n(a.value) + "\")" 
+    			    return res 
+    		  }
+    		  return "label " + res
+    		}	
+    	return ""	
+	}
+	
 	def static String getAttrCheckI18Next(NodeOverride node, String key){
 		for( a : node.attrs.toList)
 		   	if(a.key.equals(key)) {

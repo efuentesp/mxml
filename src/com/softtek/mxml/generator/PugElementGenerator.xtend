@@ -314,10 +314,12 @@ class PugElementGenerator {
 	
 	def String genHBox(int indentation, NodeOverride no)'''
 			«util.getIndentation(indentation)»div(class="hBox" «NodeOverride.getConcatAttrs(no, util.skipAttrsHBox)»)
+			«util.getIndentation(indentation+1)»«NodeOverride.getAttrCheckI18NextLabel(no,"label")»
 	'''
 	
 	def String genVBox(int indentation, NodeOverride no)'''
 			«util.getIndentation(indentation)»div(class="vBox" «NodeOverride.getConcatAttrs(no, util.skipAttrsVBox)»)
+			«util.getIndentation(indentation+1)»«NodeOverride.getAttrCheckI18NextLabel(no,"label")»
 	'''
 	
 	def String genCanvas(int indentation, NodeOverride no)'''
@@ -354,7 +356,7 @@ class PugElementGenerator {
 	'''
 	
 	def String genFormItem(int indentation, NodeOverride no)'''
-		«util.getIndentation(indentation)»label(class="formItem"«NodeOverride.getConcatAttrs(no,util.skipAttrsFormItem)»)
+        «util.getIndentation(indentation)»label(class="formItem"«NodeOverride.getConcatAttrs(no, util.skipAttrsFormItem)») «NodeOverride.getAttrCheckI18Next(no,"label")»
 	'''
 	
 	

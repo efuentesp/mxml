@@ -200,7 +200,7 @@ class Util {
 	
 	
 	//Skip Attribute Lists
-	 public ArrayList<String> skipAttrsFormItem = new ArrayList<String>(Arrays.asList("paddingTop", "paddingBottom", "width","height","direction"));
+	 public ArrayList<String> skipAttrsFormItem = new ArrayList<String>(Arrays.asList("paddingTop", "paddingBottom", "width","height","direction","label"));
 	 
 	 public ArrayList<String> skipAttrsButton = new ArrayList<String>(Arrays.asList("skin", "width", "height","styleName","direction","textAlign",
 	                                                                                "borderColor","labelPlacement","buttonMode","useHandCursor",
