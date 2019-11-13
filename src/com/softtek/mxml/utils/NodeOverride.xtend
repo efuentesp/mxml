@@ -57,8 +57,7 @@ class NodeOverride {
 		   	  return (a.value)			
 	}
 	
-
-	def static String getAttrCheckI18next(NodeOverride node, String key){
+	def static String getAttrCheckI18NextParagraph(NodeOverride node, String key){
 		for( a : node.attrs.toList)
 		   	if(a.key.equals(key)) {
 		   	  var res= a.value
@@ -69,6 +68,16 @@ class NodeOverride {
     		  return "p " + res
     		}	
     	return ""	
+	}
+	
+	def static String getAttrCheckI18Next(NodeOverride node, String key){
+		for( a : node.attrs.toList)
+		   	if(a.key.equals(key)) {
+		   	  if (a.value.contains("resourceManager")) {
+    			    return "" 
+    		  }
+    		  return a.value
+    		}	
 	}
 	
 	

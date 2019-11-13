@@ -204,7 +204,7 @@ class Util {
 	 
 	 public ArrayList<String> skipAttrsButton = new ArrayList<String>(Arrays.asList("skin", "width", "height","styleName","direction","textAlign",
 	                                                                                "borderColor","labelPlacement","buttonMode","useHandCursor",
-	                                                                                "horizontalCenter","bottom","xmlns:mx","implements"));
+	                                                                                "horizontalCenter","bottom","xmlns:mx","implements","label"));
 	                                                                                
 	 public ArrayList<String> skipAttrsHBox = new ArrayList<String>(Arrays.asList("width","paddingTop","verticalScrollPolicy","horizontalScrollPolicy",
 	                                                                                "horizontalAlign","height","verticalAlign","horizontalGap",

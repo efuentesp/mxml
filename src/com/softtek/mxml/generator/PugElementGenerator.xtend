@@ -135,9 +135,9 @@ class PugElementGenerator {
 	'''
 	
 	//Buttons
-	
+			
 	def String genButton(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»button( «NodeOverride.getConcatAttrs(no, util.skipAttrsButton)»)
+			«util.getIndentation(indentation)»button(«NodeOverride.getConcatAttrs(no, util.skipAttrsButton)») «NodeOverride.getAttrCheckI18Next(no,"label")»
 	'''
 	
 	def String genLinkButton(int indentation, NodeOverride no)'''
@@ -337,7 +337,7 @@ class PugElementGenerator {
 	def String genPanel(int indentation, NodeOverride no)'''
 			«util.getIndentation(indentation)»div(class="panel" «NodeOverride.getConcatAttrsNoDataResource(no, util.skipAttrsPanel)»)
 			«util.getIndentation(indentation+1)»div(class="panelTitle")
-			«util.getIndentation(indentation+2)»«NodeOverride.getAttrCheckI18next(no,"title")»
+			«util.getIndentation(indentation+2)»«NodeOverride.getAttrCheckI18NextParagraph(no,"title")»
 			«util.getIndentation(indentation+1)»div(class="panelContent")
 	'''
 	
