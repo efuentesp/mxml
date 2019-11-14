@@ -119,7 +119,7 @@ class PugElementGenerator {
 		   
 	//Text	
 	def String genLabel(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»label(«NodeOverride.getConcatAttrs(no, null)»)
+			«util.getIndentation(indentation)»label(«NodeOverride.getConcatAttrs(no, util.skipAttrsLabel)») «NodeOverride.getAttrCheckI18Next(no,"text")»
 	'''
 	
 	def String genText(int indentation, NodeOverride no)'''
@@ -137,7 +137,7 @@ class PugElementGenerator {
 	//Buttons
 			
 	def String genButton(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»button(«NodeOverride.getConcatAttrs(no, util.skipAttrsButton)») «NodeOverride.getAttrCheckI18Next(no,"label")»
+			«util.getIndentation(indentation)»button(«NodeOverride.getConcatAttrs(no, util.skipAttrsButton)») «NodeOverride.getAttrCheckI18Next(no,"label")» «NodeOverride.getAttrCheckI18Next(no,"icon")»
 	'''
 	
 	def String genLinkButton(int indentation, NodeOverride no)'''
