@@ -205,7 +205,11 @@ class Util {
 	 public ArrayList<String> skipAttrsButton = new ArrayList<String>(Arrays.asList("skin", "width", "height","styleName","direction","textAlign",
 	                                                                                "borderColor","labelPlacement","buttonMode","useHandCursor",
 	                                                                                "horizontalCenter","bottom","xmlns:mx","implements","label"));
-	                                                                                
+	   
+	 public ArrayList<String> skipAttrsLinkButton = new ArrayList<String>(Arrays.asList("skin", "width", "height","styleName","direction","textAlign",
+	                                                                                "borderColor","labelPlacement","buttonMode","useHandCursor",
+	                                                                                "horizontalCenter","bottom","xmlns:mx","implements","label"));
+	                                                                                                                                                             
 	 public ArrayList<String> skipAttrsHBox = new ArrayList<String>(Arrays.asList("width","paddingTop","verticalScrollPolicy","horizontalScrollPolicy",
 	                                                                                "horizontalAlign","height","verticalAlign","horizontalGap",
 	                                                                                "styleName","paddingBottom","paddingLeft","paddingRight",
@@ -227,7 +231,8 @@ class Util {
 
       public ArrayList<String> skipAttrsTextArea = new ArrayList<String>(Arrays.asList("width","textAlign","wordWrap","selectable","borderStyle","height", 
                                                                                        "htmlText","horizontalScrollPolicy","verticalScrollPolicy","fontWeight",
-                                                                                       "borderThickness","paddingLeft","paddingBottom","paddingRight","paddingTop")); 
+                                                                                       "borderThickness","paddingLeft","paddingBottom","paddingRight","paddingTop",
+                                                                                       "text")); 
                                                                                        
       public ArrayList<String> skipAttrsTextInput = new ArrayList<String>(Arrays.asList("restrict","maxChars","width","focusOut","editable","change","text",
                                                                                         "textAlign","keyUp","keyDown","disabledColor","enter"));

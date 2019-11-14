@@ -131,7 +131,7 @@ class PugElementGenerator {
 	'''
 	
 	def String genTextArea(int indentation, NodeOverride no)'''	
-			«util.getIndentation(indentation)»textarea( «NodeOverride.getConcatAttrs(no, util.skipAttrsTextArea)»)
+			«util.getIndentation(indentation)»textarea(«NodeOverride.getConcatAttrs(no, util.skipAttrsTextArea)») «NodeOverride.getAttrCheckI18Next(no,"text")»
 	'''
 	
 	//Buttons
@@ -141,7 +141,7 @@ class PugElementGenerator {
 	'''
 	
 	def String genLinkButton(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»a(href="#"): button(class="linkButton" type="button")«IF !this.getLabel(no).equalsIgnoreCase("")» «this.getLabel(no)»«ENDIF»
+			«util.getIndentation(indentation)»a(href="#"): button(class="linkButton" type="button" «NodeOverride.getConcatAttrs(no, util.skipAttrsLinkButton)») «NodeOverride.getAttrCheckI18Next(no,"label")»
 	'''
 	
 	def String genRadioButton(int indentation, NodeOverride no)'''
