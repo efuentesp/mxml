@@ -229,7 +229,7 @@ class Util {
 	                                                                               "xmlns:cmpViewRender","xmlns:cmpViewUpload","xmlns:com","xmlns:component",
 	                                                                               "xmlns:vista","xmlns:views", "xmlns:controls", "xmlns:view"))     
 	  
-	  public ArrayList<String> skipAttrsText = new ArrayList<String>(Arrays.asList("width","selectable"));                        
+	  public ArrayList<String> skipAttrsText = new ArrayList<String>(Arrays.asList("width","selectable","text"));                        
 
       public ArrayList<String> skipAttrsTextArea = new ArrayList<String>(Arrays.asList("width","textAlign","wordWrap","selectable","borderStyle","height", 
                                                                                        "htmlText","horizontalScrollPolicy","verticalScrollPolicy","fontWeight",

@@ -123,7 +123,7 @@ class PugElementGenerator {
 	'''
 	
 	def String genText(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»label(«NodeOverride.getConcatAttrs(no, util.skipAttrsText)»)
+			«util.getIndentation(indentation)»label(«NodeOverride.getConcatAttrs(no, util.skipAttrsText)») «NodeOverride.getAttrCheckI18Next(no,"text")»
 	'''
 		
 	def String genTextInput(int indentation, NodeOverride no)'''
