@@ -109,7 +109,7 @@ class Util {
     			var String value= attr.value			
     			if (attr.value.contains("?resourceManager")) {    
     			  attrs += " class=\"ternaryOperation\" data-i18n" + "=\"" + this.getFileNameAndResourceFromAttrs(attr.value).entrySet.get(0).value+"."+this.getFileNameAndResourceFromAttrs(attr.value).entrySet.get(0).key + "\""
-    			}else if (attr.value.contains("resourceManager")) {
+    			}else if (attr.value.contains("resourceManager(")) {
     				attrs += " " + "data-i18n" + "=\"" + this.getFileNameAndResourceFromAttrs(attr.value).entrySet.get(0).value+"."+this.getFileNameAndResourceFromAttrs(attr.value).entrySet.get(0).key + "\""    			    			
     			}else{
     				if(attrToSkip !== null && !attrToSkip.empty){

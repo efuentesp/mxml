@@ -73,7 +73,7 @@ class JsonResourceGenerator {
      def String getJsonFromNodeAttrs(int indentation,Node node){
     	if(!node.attrs.empty){
     		for(attr : node.attrs){
-    			if(attr.value.contains("resourceManager.getString")){
+    			if(attr.value.contains("resourceManager.getString(")){
     			  setJsonKeyValue(attr.value)
     			  return ""
     	        }   			

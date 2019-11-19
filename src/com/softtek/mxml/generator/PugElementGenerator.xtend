@@ -374,10 +374,13 @@ class PugElementGenerator {
 			«util.getIndentation(indentation)».manager «getOverride(no, "FullDeclaration")»
 	'''
 	
-
-	def String genIncludeComponent(int indentation, NodeOverride no, LinkedHashMap<String, String> nsl)'''
-			«util.getIndentation(indentation)»include /«IF nsl.get(no.prefix) !== null»«nsl.get(no.prefix).replace("*", no.name)»«ENDIF».pug
-	'''
+	def String genIncludeComponent(int indentation, NodeOverride no, LinkedHashMap<String, String> nsl){
+		if (nsl.get(no.prefix) !== null) {
+		    var comment=""
+			if (nsl.get(no.prefix).contains("http:") || nsl.get(no.prefix).contains("https:")) comment="//-"
+			util.getIndentation(indentation) + comment + "include /" + nsl.get(no.prefix).replace("*", no.name)+".pug"
+		}
+	}
 	
 	/* ++++++++++++++++++++++++++++++++++++++++++++++++ */
 	

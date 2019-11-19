@@ -124,9 +124,9 @@ class NodeOverride {
     	if(!node.attrs.empty){
     		for(attr : node.attrs){   
     			var String value= attr.value			
-    			if (attr.value.contains("?resourceManager")) {    
+    			if (attr.value.contains("?resourceManager.getString(")) {    
     			   attrs += " class=\"ternaryOperation\" data-i18n" + "=\"" + getdatai18n(attr.value)+ "\""
-    			}else if (attr.value.contains("resourceManager")) {
+    			}else if (attr.value.contains("resourceManager.getString(")) {
     			   attrs += " " + "data-i18n" + "=\"" + getdatai18n(attr.value) + "\""    			    			
     			}else{
     				if(attrToSkip !== null && !attrToSkip.empty){
