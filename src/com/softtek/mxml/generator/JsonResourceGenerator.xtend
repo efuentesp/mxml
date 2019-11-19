@@ -55,7 +55,8 @@ class JsonResourceGenerator {
     '''
     
     def CharSequence genJsonFromNode (int indentation, Node n)'''
-		«IF (n instanceof ComplexNode)»		  	
+		«IF (n instanceof ComplexNode)»	
+		   «getJsonFromNodeAttrs(indentation, n)»	  	
 		  «var innernode = n as ComplexNode»
 		  «FOR i: innernode.nodes»
 		  	«IF  n.name.equalsIgnoreCase('Application')»

@@ -200,12 +200,18 @@ class Util {
 	
 	
 	//Skip Attribute Lists
-	 public ArrayList<String> skipAttrsFormItem = new ArrayList<String>(Arrays.asList("paddingTop", "paddingBottom", "width","height","direction"));
+	 public ArrayList<String> skipAttrsFormItem = new ArrayList<String>(Arrays.asList("paddingTop", "paddingBottom", "width","height","direction","label"));
 	 
 	 public ArrayList<String> skipAttrsButton = new ArrayList<String>(Arrays.asList("skin", "width", "height","styleName","direction","textAlign",
 	                                                                                "borderColor","labelPlacement","buttonMode","useHandCursor",
-	                                                                                "horizontalCenter","bottom","xmlns:mx","implements"));
+	                                                                                "horizontalCenter","bottom","xmlns:mx","implements","label","icon"));
+	   
+	 public ArrayList<String> skipAttrsLabel = new ArrayList<String>(Arrays.asList("label"));
 	                                                                                
+	 public ArrayList<String> skipAttrsLinkButton = new ArrayList<String>(Arrays.asList("skin", "width", "height","styleName","direction","textAlign",
+	                                                                                "borderColor","labelPlacement","buttonMode","useHandCursor",
+	                                                                                "horizontalCenter","bottom","xmlns:mx","implements","label"));
+	                                                                                                                                                             
 	 public ArrayList<String> skipAttrsHBox = new ArrayList<String>(Arrays.asList("width","paddingTop","verticalScrollPolicy","horizontalScrollPolicy",
 	                                                                                "horizontalAlign","height","verticalAlign","horizontalGap",
 	                                                                                "styleName","paddingBottom","paddingLeft","paddingRight",
@@ -223,11 +229,12 @@ class Util {
 	                                                                               "xmlns:cmpViewRender","xmlns:cmpViewUpload","xmlns:com","xmlns:component",
 	                                                                               "xmlns:vista","xmlns:views", "xmlns:controls", "xmlns:view"))     
 	  
-	  public ArrayList<String> skipAttrsText = new ArrayList<String>(Arrays.asList("width","selectable"));                        
+	  public ArrayList<String> skipAttrsText = new ArrayList<String>(Arrays.asList("width","selectable","text"));                        
 
       public ArrayList<String> skipAttrsTextArea = new ArrayList<String>(Arrays.asList("width","textAlign","wordWrap","selectable","borderStyle","height", 
                                                                                        "htmlText","horizontalScrollPolicy","verticalScrollPolicy","fontWeight",
-                                                                                       "borderThickness","paddingLeft","paddingBottom","paddingRight","paddingTop")); 
+                                                                                       "borderThickness","paddingLeft","paddingBottom","paddingRight","paddingTop",
+                                                                                       "text")); 
                                                                                        
       public ArrayList<String> skipAttrsTextInput = new ArrayList<String>(Arrays.asList("restrict","maxChars","width","focusOut","editable","change","text",
                                                                                         "textAlign","keyUp","keyDown","disabledColor","enter"));
@@ -235,6 +242,6 @@ class Util {
       public ArrayList<String> skipAttrsPanel = new ArrayList<String>(Arrays.asList("styleName","width","verticalScrollPolicy","horizontalScrollPolicy",
       	                                                                            "paddingBottom","layout","horizontalAlign","paddingLeft","paddingRight",
       	                                                                            "xmlns:mx","height", "paddingTop", "xmlns:cmpView", "verticalAlign", 
-                                                                                    "creationComplete", "resizeEffect", "titleStyleName")); 
+                                                                                    "creationComplete", "resizeEffect", "titleStyleName","title")); 
                                                                        
 }

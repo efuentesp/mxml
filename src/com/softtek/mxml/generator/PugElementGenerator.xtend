@@ -119,11 +119,11 @@ class PugElementGenerator {
 		   
 	//Text	
 	def String genLabel(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»label(«NodeOverride.getConcatAttrs(no, null)»)
+			«util.getIndentation(indentation)»label(«NodeOverride.getConcatAttrs(no, util.skipAttrsLabel)») «NodeOverride.getAttrCheckI18Next(no,"text")»
 	'''
 	
 	def String genText(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»label(«NodeOverride.getConcatAttrs(no, util.skipAttrsText)»)
+			«util.getIndentation(indentation)»label(«NodeOverride.getConcatAttrs(no, util.skipAttrsText)») «NodeOverride.getAttrCheckI18Next(no,"text")»
 	'''
 		
 	def String genTextInput(int indentation, NodeOverride no)'''
@@ -131,17 +131,17 @@ class PugElementGenerator {
 	'''
 	
 	def String genTextArea(int indentation, NodeOverride no)'''	
-			«util.getIndentation(indentation)»textarea( «NodeOverride.getConcatAttrs(no, util.skipAttrsTextArea)»)
+			«util.getIndentation(indentation)»textarea(«NodeOverride.getConcatAttrs(no, util.skipAttrsTextArea)») «NodeOverride.getAttrCheckI18Next(no,"text")»
 	'''
 	
 	//Buttons
-	
+			
 	def String genButton(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»button( «NodeOverride.getConcatAttrs(no, util.skipAttrsButton)»)
+			«util.getIndentation(indentation)»button(«NodeOverride.getConcatAttrs(no, util.skipAttrsButton)») «NodeOverride.getAttrCheckI18Next(no,"label")» «NodeOverride.getAttrCheckI18Next(no,"icon")»
 	'''
 	
 	def String genLinkButton(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»a(href="#"): button(class="linkButton«getOverride(no, "OnlyClass")»" type="button")«IF !this.getLabel(no).equalsIgnoreCase("")» «this.getLabel(no)»«ENDIF»
+			«util.getIndentation(indentation)»a(href="#"): button(class="linkButton" type="button" «NodeOverride.getConcatAttrs(no, util.skipAttrsLinkButton)») «NodeOverride.getAttrCheckI18Next(no,"label")»
 	'''
 	
 	def String genRadioButton(int indentation, NodeOverride no)'''
@@ -157,11 +157,11 @@ class PugElementGenerator {
 	// Value Selectors
 	
 	def String genHSLider(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»input(type="range" class="hSlider«getOverride(no, "OnlyClass")»")
+			«util.getIndentation(indentation)»input(type="range" class="hSlider")
 	'''
 	
 	def String genVSLider(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»input(type="range" class="vSlider«getOverride(no, "OnlyClass")»")
+			«util.getIndentation(indentation)»input(type="range" class="vSlider")
 	'''
 	
 	def String genNumericStepper(int indentation, NodeOverride no)'''
@@ -249,41 +249,41 @@ class PugElementGenerator {
 	// Media and Progress
 	
 	def String genImage(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»div(class="image«getOverride(no, "OnlyClass")»")
+			«util.getIndentation(indentation)»div(class="image")
 	'''
 	
 	def String genSWFLoader(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»div(class="sWFLoader«getOverride(no, "OnlyClass")»")
+			«util.getIndentation(indentation)»div(class="sWFLoader")
 	'''
 	
 	// Control Bar
 	
 	def String genControlBar(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»div(class="controlBar«getOverride(no, "OnlyClass")»")
+			«util.getIndentation(indentation)»div(class="controlBar")
 	'''
 	
 	def String genApplicationControlBar(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»div(class="applicationControlBar«getOverride(no, "OnlyClass")»")
+			«util.getIndentation(indentation)»div(class="applicationControlBar")
 	'''
 	
 	// Navigators
 	
 	def String genAccordion(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»button(class="accordion«getOverride(no, "OnlyClass")»") Section 1
+			«util.getIndentation(indentation)»button(class="accordion") Section 1
 			«util.getIndentation(indentation)»div(class="accordion-panel")
 			«util.getIndentation(indentation)»p contents
 	'''
 	
 	def String genToggleButtonBar(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»div(class="toggleButtonBar«getOverride(no, "OnlyClass")»")
+			«util.getIndentation(indentation)»div(class="toggleButtonBar")
 	'''
 	
 	def String genMenuBar(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»div(class="menuBar«getOverride(no, "OnlyClass")»")
+			«util.getIndentation(indentation)»div(class="menuBar")
 	'''
 	
 	def String genTabNavigator(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»ul(class="tabs«getOverride(no, "OnlyClass")»")
+			«util.getIndentation(indentation)»ul(class="tabs")
 			«util.getIndentation(indentation+1)»li: a(href="#tab1") Nunc tincidunt
 			«util.getIndentation(indentation)»div(class="tab_container")
 			«util.getIndentation(indentation+1)»div(class="tab_content" id="tab1")
@@ -292,11 +292,11 @@ class PugElementGenerator {
 	// Pop ups
 	
 	def String genPopUpButton(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»button(type="button" id="open"«getOverride(no, "ClassDeclaration")») Nombre PopUpButton     
+			«util.getIndentation(indentation)»button(type="button" id="open") Nombre PopUpButton     
 	'''
 	
 	def String genTitleWindow(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»div(id="popup«getOverride(no, "ClassDeclaration")»" style="display: none;")
+			«util.getIndentation(indentation)»div(id="popup" style="display: none;")
 			«util.getIndentation(indentation+1)»div(class="content-popup")
 			«util.getIndentation(indentation+2)»div(class="close"): a(href="#" id="close") X
 			«util.getIndentation(indentation+2)»div
@@ -307,46 +307,48 @@ class PugElementGenerator {
 	'''
 	
 	def String genPopUpMenuButton(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»div(class="popUpMenuButton«getOverride(no, "OnlyClass")»")
+			«util.getIndentation(indentation)»div(class="popUpMenuButton")
 	'''
 	
 	// Containers
 	
 	def String genHBox(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»div(class="hBox«getOverride(no, "OnlyClass")»" «NodeOverride.getConcatAttrs(no, util.skipAttrsHBox)»)
+			«util.getIndentation(indentation)»div(class="hBox" «NodeOverride.getConcatAttrs(no, util.skipAttrsHBox)»)
+			«util.getIndentation(indentation+1)»«NodeOverride.getAttrCheckI18NextLabel(no,"label")»
 	'''
 	
 	def String genVBox(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»div(class="vBox«getOverride(no, "OnlyClass")»" «NodeOverride.getConcatAttrs(no, util.skipAttrsVBox)»)
+			«util.getIndentation(indentation)»div(class="vBox" «NodeOverride.getConcatAttrs(no, util.skipAttrsVBox)»)
+			«util.getIndentation(indentation+1)»«NodeOverride.getAttrCheckI18NextLabel(no,"label")»
 	'''
 	
 	def String genCanvas(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»div(class="canvas«getOverride(no, "OnlyClass")»")
+			«util.getIndentation(indentation)»div(class="canvas")
 	'''
 	
 	def String genVDividedBox(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»div(class="vDividedBox«getOverride(no, "OnlyClass")»")
+			«util.getIndentation(indentation)»div(class="vDividedBox")
 			«util.getIndentation(indentation+1)»div(class="vDivider")
 	'''
 	
 	def String genHDividedBox(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»div(class="hDividedBox«getOverride(no, "OnlyClass")»")
+			«util.getIndentation(indentation)»div(class="hDividedBox")
 			«util.getIndentation(indentation+1)»div(class="hDivider")
 	'''
 	
 	def String genPanel(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»div(class="panel«getOverride(no, "OnlyClass")»" «NodeOverride.getConcatAttrs(no, util.skipAttrsPanel)»)
-«««			«util.getIndentation(indentation+1)»div(class="panelTitle")
-«««			«util.getIndentation(indentation+2)»p Panel Title
+			«util.getIndentation(indentation)»div(class="panel" «NodeOverride.getConcatAttrsNoDataResource(no, util.skipAttrsPanel)»)
+			«util.getIndentation(indentation+1)»div(class="panelTitle")
+			«util.getIndentation(indentation+2)»«NodeOverride.getAttrCheckI18NextParagraph(no,"title")»
 			«util.getIndentation(indentation+1)»div(class="panelContent")
 	'''
 	
 	def String genTile(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»div(class="tile«getOverride(no, "OnlyClass")»")
+			«util.getIndentation(indentation)»div(class="tile")
 	'''
 	
 	def String genForm(int indentation, NodeOverride no)'''
-			«util.getIndentation(indentation)»div(class="form«getOverride(no, "OnlyClass")»")
+			«util.getIndentation(indentation)»div(class="form")
 			«util.getIndentation(indentation+1)»form(id="id")
 			«util.getIndentation(indentation+2)»div(class="formTitle")
 			«util.getIndentation(indentation+3)»p Form Title
@@ -354,7 +356,7 @@ class PugElementGenerator {
 	'''
 	
 	def String genFormItem(int indentation, NodeOverride no)'''
-		«util.getIndentation(indentation)»label(class="formItem"«NodeOverride.getConcatAttrs(no,util.skipAttrsFormItem)»)
+        «util.getIndentation(indentation)»label(class="formItem"«NodeOverride.getConcatAttrs(no, util.skipAttrsFormItem)») «NodeOverride.getAttrCheckI18Next(no,"label")»
 	'''
 	
 	
