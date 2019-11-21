@@ -182,6 +182,15 @@ class Util {
     	var String[] aux = fname.split("@_")
     	return aux.get(1)
     }
+    
+    def Boolean containsNode(NodeOverride no, String key){
+    	var node = no as ComplexNodeOverride
+		for( a : node.nodes)
+		   	if(a.name.equals(key)) {
+		   		return true
+    		}	
+    	return false	
+	}
         
     // Resources
 

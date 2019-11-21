@@ -55,6 +55,12 @@ class PugElementGenerator {
 			«this.genComboBox(indentation, n)»
 		«ELSEIF n.name.equals('DataGrid')»	
 			«this.genDataGrid(indentation, n)»
+		«ELSEIF n.name.equals('DataGridColumn')»	
+			«this.genDataGridColumn(indentation, n)»
+		«ELSEIF n.name.equals('columns')»	
+			«this.genDataGridColumns(indentation, n)»
+		«ELSEIF n.name.equals('Array')»	
+			«this.genDataArray(indentation, n)»
 		«ELSEIF n.name.equals('TileList')»	
 			«this.genTileList(indentation, n)»
 		«ELSEIF n.name.equals('HorizontalList')»	
@@ -181,7 +187,7 @@ class PugElementGenerator {
 	def String genLinkButton(int indentation, NodeOverride no)'''
 		«var id = getProperty(no, "id", "id") »
 		«var i18n =  getI18n(no, "label")»
-		«var click= getProperty(no, "click") !== null ? "title='" + getProperty(no, "click") + "'" : ""»
+		«var click= getProperty(no, "click") !== null ? " title='" + getProperty(no, " click") + "'" : ""»
 		«var flexOverride = getProperty(no, "flexOverride", "class")»
 		«util.getIndentation(indentation)»a(href="#"): button( class="linkButton«flexOverride»" type="button"«id»«i18n»«click» )
 	'''
@@ -246,35 +252,35 @@ class PugElementGenerator {
 		«util.getIndentation(indentation+1)»option(value="B") B
 		«util.getIndentation(indentation+1)»option(value="C") C
 	'''
-	 
+	 	  
 	def String genDataGrid(int indentation, NodeOverride no)'''
-		«var flexOverride = getProperty(no, "flexOverride")»
-		«util.getIndentation(indentation)»table(class="dataGrid«flexOverride»")
+		«util.getIndentation(indentation)»table(class="dataGrid")
 		«util.getIndentation(indentation+1)»thead
 		«util.getIndentation(indentation+2)»tr(class="gridRow")
-		«util.getIndentation(indentation+3)»th(class="dataGridHeader"): span City
-		«util.getIndentation(indentation+3)»th(class="dataGridHeader"): span Population
-		«util.getIndentation(indentation+3)»th(class="dataGridHeader"): span State
-		«util.getIndentation(indentation+1)»tbody
-		«util.getIndentation(indentation+2)»tr(class="gridRow")
-		«util.getIndentation(indentation+3)»td(class="gridItem"): span Los Angeles
-		«util.getIndentation(indentation+3)»td(class="gridItem"): span 3,000,000
-		«util.getIndentation(indentation+3)»td(class="gridItem"): span CA
-		«util.getIndentation(indentation+2)»tr(class="gridRow")
-		«util.getIndentation(indentation+3)»td(class="gridItem"): span New York
-		«util.getIndentation(indentation+3)»td(class="gridItem"): span 8,000,000
-		«util.getIndentation(indentation+3)»td(class="gridItem"): span NY
-		«util.getIndentation(indentation+2)»tr(class="gridRow")
-		«util.getIndentation(indentation+3)»td(class="gridItem"): span Chicago
-		«util.getIndentation(indentation+3)»td(class="gridItem"): span 2,000,000
-		«util.getIndentation(indentation+3)»td(class="gridItem"): span IL
 	'''
-	 
+	
+	def String genDataGridColumn(int indentation, NodeOverride no)'''
+	    «var i18n =  getI18n(no, "headerText")»
+		«util.getIndentation(indentation+1)»th(class="dataGridHeader"): span(«i18n»)
+	'''
+	
+	def String genDataGridColumns(int indentation, NodeOverride no)'''
+	'''
+	
 	def genAdvancedDataGridColumn(int indentation, NodeOverride no)'''
-		«var flexOverride = getProperty(no, "flexOverride")»
-		«util.getIndentation(indentation)»div(class="AdvancedDataGridColumn«flexOverride»")
+		«util.getIndentation(indentation)»div(class="AdvancedDataGridColumn")
 	''' 
 	 
+	// If an Array contains a DatagritColumns we create a table.
+	// Probably we will have more choices for Arrays
+	def String genDataArray(int indentation, NodeOverride no)'''
+	    «IF (util.containsNode(no,"DataGridColumn"))»
+		«util.getIndentation(indentation)»table(class="dataGrid")
+		«util.getIndentation(indentation+1)»thead
+		«util.getIndentation(indentation+2)»tr(class="gridRow")
+		«ENDIF»
+	'''
+	
 	def String genTileList(int indentation, NodeOverride no)'''
 		«var flexOverride = getProperty(no, "flexOverride", "class")»
 		«util.getIndentation(indentation)»select(size="3"«flexOverride»)
@@ -470,15 +476,15 @@ class PugElementGenerator {
 	// Other
 	
 	def String genRemoteObject(int indentation, NodeOverride no)'''
-		«util.getIndentation(indentation)»div(class="RemoteObject")»
+		«util.getIndentation(indentation)»div(class="RemoteObject")
 	'''
 	
 	def String genMethod(int indentation, NodeOverride no)'''
-		«util.getIndentation(indentation)»div(class="Method")»
+		«util.getIndentation(indentation)»div(class="Method")
 	'''
 	
 	def String genManager(int indentation, NodeOverride no)'''
-		«util.getIndentation(indentation)»div(class="Manager")»
+		«util.getIndentation(indentation)»div(class="Manager")
 	'''
 	
 	def String genIncludeComponent(int indentation, NodeOverride no, LinkedHashMap<String, String> nsl){
