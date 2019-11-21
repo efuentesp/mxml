@@ -145,9 +145,9 @@ class NodeOverride {
     }
     
     def static String getdatai18n(String value){
-    	var entry_value = new Util().getFileNameAndResourceFromAttrs(value).entrySet.get(0).value
-    	var entry_key = new Util().getFileNameAndResourceFromAttrs(value).entrySet.get(0).key
-    	return entry_value+"_"+entry_key+"."+entry_key.split("_").get(entry_key.split("_").size-1)	
+    	var entry_value = new Util().getFileNameAndResourceFromAttrs(value).entrySet.get(0).value.trim()
+    	var entry_key = new Util().getFileNameAndResourceFromAttrs(value).entrySet.get(0).key.trim()
+    	return entry_value+"_"+entry_key.trim()+"."+entry_key.trim().split("_").get(entry_key.trim().split("_").size-1).trim()
     }
     
     def static String checkHtmlAttrClass(String attr){    	
@@ -187,5 +187,18 @@ class NodeOverride {
     	return sAttrs
     }
     
+    
+    def static String getAttrCheckI18N(NodeOverride node, String key){
+		for( a : node.attrs.toList)
+		   	if(a.key.equals(key)) {
+		   	  var res= a.value
+		   	  if (a.value.contains("resourceManager")) {
+    			    res = "data-i18n" + "=\"" + getdatai18n(a.value) + "\"" 
+    			    return res 
+    		  }
+    		  return res
+    		}	
+    	return ""	
+	}
 	
 }
