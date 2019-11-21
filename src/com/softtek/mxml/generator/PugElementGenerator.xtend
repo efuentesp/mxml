@@ -61,6 +61,10 @@ class PugElementGenerator {
 			«this.genDataGridColumns(indentation, n)»
 		«ELSEIF n.name.equals('Array')»	
 			«this.genDataArray(indentation, n)»
+		«ELSEIF n.name.equals('AdvancedDataGrid')»
+			«this.genDataGrid(indentation, n)»
+		«ELSEIF n.name.equals('AdvancedDataGridColumn')»
+		    «this.genDataGridColumn(indentation, n)»
 		«ELSEIF n.name.equals('TileList')»	
 			«this.genTileList(indentation, n)»
 		«ELSEIF n.name.equals('HorizontalList')»	
@@ -101,8 +105,6 @@ class PugElementGenerator {
 			«this.genDateChooser(indentation, n)»
 		«ELSEIF n.name.equals("FormItem")»
 			«this.genFormItem(indentation, n)»
-		«ELSEIF n.name.equals("AdvancedDataGridColumn")»
-			«this.genAdvancedDataGridColumn(indentation, n)»
 	    «ELSE» 				
 			«util.getIndentation(indentation)».«n.name»
 		«ENDIF»
@@ -266,15 +268,11 @@ class PugElementGenerator {
 	
 	def String genDataGridColumns(int indentation, NodeOverride no)'''
 	'''
-	
-	def genAdvancedDataGridColumn(int indentation, NodeOverride no)'''
-		«util.getIndentation(indentation)»div(class="AdvancedDataGridColumn")
-	''' 
 	 
 	// If an Array contains a DatagritColumns we create a table.
 	// Probably we will have more choices for Arrays
 	def String genDataArray(int indentation, NodeOverride no)'''
-	    «IF (util.containsNode(no,"DataGridColumn"))»
+	    «IF (util.containsNode(no,"DataGridColumn") || util.containsNode(no,"AdvancedDataGridColumn"))»
 		«util.getIndentation(indentation)»table(class="dataGrid")
 		«util.getIndentation(indentation+1)»thead
 		«util.getIndentation(indentation+2)»tr(class="gridRow")

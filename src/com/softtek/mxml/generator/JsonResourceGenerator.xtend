@@ -86,7 +86,12 @@ class JsonResourceGenerator {
     def void setJsonKeyValue(String value){
 		var LinkedHashMap<String, String> result = util.getFileNameAndResourceFromAttrs(value)		
 		for(entry : result.entrySet){
-			jsonList.add("\"" + entry.value+"_"+entry.key +"\"" + ":{"+ "\"" +entry.key.split("_").get(entry.key.split("_").size-1) +"\"" + ":"+ "\""+entry.key.split("_").get(entry.key.split("_").size-1)+"\"}")
+			jsonList.add("\"" + entry.value.trim +"_"+entry.key.trim+"\"" 
+				+ ":{" 
+				       + "\"" +entry.key.trim.split("_").get(entry.key.trim.split("_").size-1) +"\"" + ":"
+				       + "\""+entry.key.trim.split("_").get(entry.key.trim.split("_").size-1)
+				+"\"}"
+			)
 		}
 		   
     }
