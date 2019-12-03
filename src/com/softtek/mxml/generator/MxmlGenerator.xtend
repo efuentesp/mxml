@@ -24,15 +24,16 @@ class MxmlGenerator extends AbstractGenerator {
   JsonResourceGenerator jsonResourceGenerator= new JsonResourceGenerator()
   AppComponentListGenerator appComponentListGenerator = new AppComponentListGenerator()  
   JsStateGenerator jsStateGenerator = new JsStateGenerator()
-  
+  GulpPugSassTsGenerator gupPugSassTsGenerator = new GulpPugSassTsGenerator()
   var LinkedHashMap<String,LinkedHashSet<State>> appStates;	
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		appStates = new LinkedHashMap<String,LinkedHashSet<State>>()
 		appStates = State.getAppStates(resource)	
 		pugGenerator.doGenerator(resource,fsa, appStates)	
+		gupPugSassTsGenerator.doGenerator(resource,fsa, appStates)
 		appComponentListGenerator.doGenerator(resource,fsa) 
-		jsonResourceGenerator.doGenerator(resource,fsa)	
+		jsonResourceGenerator.doGenerator(resource,fsa)			
 		if(appStates !== null && !appStates.empty){
 			jsStateGenerator.doGenerator(fsa, appStates)
 		}		 
